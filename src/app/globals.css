@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ATELIER DESIGN SYSTEM — GLOBAL STYLES & MOBILE COMPATIBILITY SYSTEM
+   ATELIER DESIGN SYSTEM — PROFESSIONAL MOBILE-FIRST & DESKTOP ARCHITECTURE
    ========================================================================== */
 
 :root {
@@ -67,16 +67,38 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+}
+
+/* Images CONTAINED & RESPONSIVE */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Typography Hierarchy */
 h1, h2, h3, h4, .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.025em;
-  line-height: 1.15;
   color: var(--text-primary);
-  word-break: break-word;
+  word-break: normal;
   overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: clamp(1.85rem, 5vw, 3.5rem);
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: clamp(1.45rem, 4vw, 2.5rem);
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 3vw, 1.35rem);
+  line-height: 1.35;
 }
 
 .eyebrow {
@@ -92,11 +114,18 @@ h1, h2, h3, h4, .font-display {
   font-family: var(--font-mono);
 }
 
-/* Containers */
+/* Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
 }
 
 /* EMOJI ICON CONTAINER SPECIFICATION */
@@ -109,6 +138,7 @@ h1, h2, h3, h4, .font-display {
   justify-content: center;
   font-size: 28px;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 /* DARK LIME DASHBOARD SIDEBAR */
@@ -177,7 +207,7 @@ input:focus, textarea:focus, select:focus {
   transition: transform 150ms var(--ease-premium), filter 150ms var(--ease-premium), box-shadow 150ms var(--ease-premium);
   border: 1px solid transparent;
   white-space: nowrap;
-  min-height: 44px;
+  min-height: 48px;
 }
 
 .btn-olive {
@@ -218,6 +248,7 @@ input:focus, textarea:focus, select:focus {
 .btn-sm {
   padding: 8px 16px;
   font-size: 0.82rem;
+  min-height: 40px;
 }
 
 /* Card System & Default Styling */
@@ -251,25 +282,6 @@ input:focus, textarea:focus, select:focus {
 /* Table Row Hover */
 tr:hover {
   background-color: rgba(212, 225, 87, 0.06);
-}
-
-/* Keyframe Floating Oscillations */
-@keyframes float1 {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes float2 {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-14px); }
-}
-
-.animate-float {
-  animation: float1 6s var(--ease-smooth) infinite;
-}
-
-.animate-float-slow {
-  animation: float2 8s var(--ease-smooth) 1.5s infinite;
 }
 
 /* Scroll Intersection Reveal Animation Classes */
@@ -309,28 +321,171 @@ tr:hover {
 }
 
 /* ==========================================================================
-   PERFECT MOBILE COMPATIBILITY & ALIGNMENT (SCREENS <= 768PX)
+   LAYOUT GRID CLASSES — DESKTOP & MOBILE FIRST BREAKPOINTS
    ========================================================================== */
 
-@media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
+/* Hero Grid */
+.grid-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* Metrics Grid */
+.grid-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+/* Steps Grid */
+.grid-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Categories Grid */
+.grid-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* 2-Column Grid (Preview, Calculator, Trust) */
+.grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* 3-Column Grid (Showcase, Products, Explore) */
+.grid-three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* 4-Column Grid (Dashboard Stats) */
+.grid-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Mobile Stack Header */
+.layout-stack-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* Horizontal Tab Scroll */
+.layout-tabs-scroll {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid var(--border-light);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+}
+
+.layout-tabs-scroll > * {
+  flex-shrink: 0;
+}
+
+/* Table Scroll Wrapper */
+.layout-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Floating Dashboard Pill */
+.floating-dashboard-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  max-width: 90vw;
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (TABLET & MOBILE BREAKPOINTS)
+   ========================================================================== */
+
+/* TABLET BREAKPOINT (< 1024PX) */
+@media (max-width: 1023px) {
+  .nav-links-desktop {
+    display: none !important;
+  }
+  .nav-hamburger-btn {
+    display: flex !important;
   }
 
+  .grid-hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .grid-hero .hero-actions {
+    justify-content: center;
+  }
+
+  .grid-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .grid-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .grid-categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .grid-two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .grid-three-col {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .grid-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .animate-float, .animate-float-slow {
+    display: none !important;
+  }
+}
+
+/* MOBILE BREAKPOINT (< 768PX) */
+@media (max-width: 767px) {
   .container {
     padding: 0 16px !important;
   }
 
-  /* Prevent text wrapping & font battles */
   h1 {
-    font-size: 1.65rem !important;
+    font-size: 1.75rem !important;
     line-height: 1.25 !important;
-    letter-spacing: -0.02em !important;
   }
 
   h2 {
-    font-size: 1.45rem !important;
+    font-size: 1.4rem !important;
     line-height: 1.3 !important;
   }
 
@@ -339,21 +494,11 @@ tr:hover {
     line-height: 1.35 !important;
   }
 
-  /* Hide desktop navbar links to eliminate top bar collision */
-  .nav-links-desktop {
-    display: none !important;
-  }
-
-  /* Hide hero floating cards on mobile to stop overlapping body text */
-  .animate-float, .animate-float-slow, .hero-badge, .hero-badge-2 {
-    display: none !important;
-  }
-
-  /* Hero section single column layout */
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
-    text-align: center !important;
+  .grid-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: center;
   }
 
   .hero-actions {
@@ -366,78 +511,43 @@ tr:hover {
     width: 100% !important;
   }
 
-  /* Mobile Stack Header for Dashboard & Product Pages */
-  .mobile-stack-header {
+  .grid-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .grid-steps, .grid-two-col, .grid-three-col, .grid-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .grid-categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .layout-stack-header {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 16px !important;
     width: 100% !important;
   }
 
-  .mobile-stack-header > * {
+  .layout-stack-header > * {
     width: 100% !important;
   }
 
-  /* Dashboard Stat Grid: single column on mobile for clean padding */
-  .dashboard-stat-grid, .stats-grid {
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }
-
-  /* Metrics Strip: 1 column clean list like Nimquest */
-  .metrics-grid {
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-    text-align: center !important;
-  }
-
-  .metrics-grid .font-display {
-    font-size: 1.8rem !important;
-  }
-
-  /* Step cards & Category cards: stacked clean single column */
-  .steps-grid, .category-grid, .cat-grid {
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }
-
-  /* Storefront Preview, Revenue Calculator, Trust Grid */
-  .preview-grid, .calculator-grid, .trust-grid, .creators-grid, .explore-grid, .products-grid {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-
-  /* Mobile Tab Navigation Horizontal Scroll */
-  .mobile-tabs-scroll {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    width: 100% !important;
-    padding-bottom: 8px !important;
-    gap: 16px !important;
-  }
-
-  .mobile-tabs-scroll > * {
-    white-space: nowrap !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Tables: scrollable wrapper */
-  table {
-    display: block !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    width: 100% !important;
-  }
-
-  /* Dark Lime Dashboard Sidebar Drawer */
+  /* Dark Lime Dashboard Sidebar Offcanvas Drawer */
   .dashboard-sidebar {
     position: fixed !important;
     top: 0 !important;
     bottom: 0 !important;
     left: 0 !important;
-    width: 270px !important;
+    width: 275px !important;
     z-index: 1000 !important;
     transform: translateX(-100%) !important;
     transition: transform 300ms var(--ease-premium) !important;
@@ -445,5 +555,16 @@ tr:hover {
 
   .dashboard-sidebar.open {
     transform: translateX(0) !important;
+  }
+}
+
+/* SMALL MOBILE BREAKPOINT (< 400PX) */
+@media (max-width: 399px) {
+  .grid-categories {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 1.55rem !important;
   }
 }

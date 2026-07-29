@@ -57,12 +57,12 @@ export default function DashboardPage() {
         </div>
 
         {/* Top Header Title & Actions (Mobile Stack Container) */}
-        <div className="mobile-stack-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px', gap: '16px' }}>
+        <div className="layout-stack-header" style={{ marginBottom: '24px' }}>
           <div>
             <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '6px' }}>
               <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>CREATOR DASHBOARD</span>
             </div>
-            <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.2rem)', lineHeight: 1.25 }}>Welcome back, {profile.displayName}</h1>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', lineHeight: 1.25 }}>Welcome back, {profile.displayName}</h1>
           </div>
 
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
@@ -76,26 +76,26 @@ export default function DashboardPage() {
         </div>
 
         {/* Tab Navigation with Touch Horizontal Scroll */}
-        <div className="mobile-tabs-scroll" style={{ display: 'flex', gap: '20px', borderBottom: '1px solid var(--border-light)', marginBottom: '28px', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-          <Link href="/dashboard" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid #D4E157', fontWeight: 600, color: 'var(--accent-olive)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
+        <div className="layout-tabs-scroll" style={{ marginBottom: '28px' }}>
+          <Link href="/dashboard" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid #D4E157', fontWeight: 600, color: 'var(--accent-olive)', fontSize: '0.88rem' }}>
             Overview
           </Link>
-          <Link href="/dashboard/products" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
+          <Link href="/dashboard/products" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
             Products ({stats.activeProducts})
           </Link>
-          <Link href="/dashboard/sales" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
+          <Link href="/dashboard/sales" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
             Sales History
           </Link>
-          <Link href="/dashboard/share" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
+          <Link href="/dashboard/share" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
             Share & Badges
           </Link>
-          <Link href="/dashboard/settings" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
+          <Link href="/dashboard/settings" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
             Settings
           </Link>
         </div>
 
         {/* 4 Stat Cards */}
-        <div className="dashboard-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
+        <div className="grid-stats" style={{ marginBottom: '32px' }}>
           <div className="card glow-hover" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
               <span className="eyebrow">TOTAL SALES</span>
@@ -150,7 +150,7 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <div className="layout-table-wrapper">
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem', minWidth: '500px' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
@@ -179,7 +179,6 @@ export default function DashboardPage() {
         @media (max-width: 768px) {
           .dashboard-content-main { padding: 16px 16px 120px 16px !important; }
           .dashboard-mobile-header { display: flex !important; }
-          .dashboard-stat-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>
