@@ -4,10 +4,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import SidebarNav from '@/components/SidebarNav';
 import {
-  Package, TrendingUp, DollarSign, ExternalLink, Plus, Share2, Settings
+  Package, TrendingUp, DollarSign, ExternalLink, Plus, Menu
 } from 'lucide-react';
 
 export default function DashboardPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profile] = useState({
     handle: 'mayastudio',
     displayName: 'Maya Lin Studio',
@@ -29,138 +30,158 @@ export default function DashboardPage() {
   ]);
 
   return (
-    <div className="ambient-bg-wash" style={{ display: 'flex', minHeight: '100vh' }}>
-      {/* Sidebar Navigation */}
-      <SidebarNav handle={profile.handle} />
+    <div className="ambient-bg-wash" style={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
+      {/* Sidebar Navigation with Dark Lime theme & Mobile Drawer support */}
+      <SidebarNav handle={profile.handle} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main Content Area */}
-      <div style={{ flex: 1, padding: '40px 48px', overflowY: 'auto' }}>
+      <div className="dashboard-content-main" style={{ flex: 1, padding: '24px 32px 120px 32px', overflowY: 'auto', width: '100%' }}>
+        {/* Mobile Header Bar with Hamburger Menu */}
+        <div className="dashboard-mobile-header" style={{ display: 'none', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid var(--border-light)' }}>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <Menu size={24} color="var(--text-primary)" />
+            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Menu</span>
+          </button>
+          <span className="font-display" style={{ fontWeight: 700, fontSize: '1.1rem' }}>Atelier</span>
+        </div>
+
         {/* Landscape Header Image */}
         <div style={{
-          width: '100%', maxHeight: '180px', height: '180px', borderRadius: '16px', overflow: 'hidden',
-          marginBottom: '32px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)'
+          width: '100%', maxHeight: '160px', height: '140px', borderRadius: '16px', overflow: 'hidden',
+          marginBottom: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)'
         }} className="img-hover">
           <img src="/images/dashboard_header_desk.jpg" alt="Dashboard Desk Header" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
-        {/* Top Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        {/* Top Header Title & Actions (Mobile Stack Container) */}
+        <div className="mobile-stack-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px', gap: '16px' }}>
           <div>
-            <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '6px 14px', borderRadius: '100px', marginBottom: '10px' }}>
-              <span className="eyebrow" style={{ color: 'var(--text-secondary)' }}>CREATOR DASHBOARD</span>
+            <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '6px' }}>
+              <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>CREATOR DASHBOARD</span>
             </div>
-            <h1 style={{ fontSize: '2.2rem' }}>Welcome back, {profile.displayName}</h1>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.2rem)', lineHeight: 1.25 }}>Welcome back, {profile.displayName}</h1>
           </div>
 
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
             <Link href="/dashboard/products" className="btn btn-lime btn-sm">
               <Plus size={16} /> Add Product
             </Link>
             <Link href={`/${profile.handle}`} target="_blank" className="btn btn-ghost btn-sm">
-              <ExternalLink size={16} /> View Storefront
+              <ExternalLink size={16} /> View Store
             </Link>
           </div>
         </div>
 
-        {/* Tab Navigation with Lime Active Underline */}
-        <div style={{ display: 'flex', gap: '24px', borderBottom: '1px solid var(--border-light)', marginBottom: '32px' }}>
-          <Link href="/dashboard" style={{ textDecoration: 'none', padding: '12px 0', borderBottom: '3px solid #D4E157', fontWeight: 600, color: 'var(--accent-olive)', fontSize: '0.92rem' }}>
+        {/* Tab Navigation with Touch Horizontal Scroll */}
+        <div className="mobile-tabs-scroll" style={{ display: 'flex', gap: '20px', borderBottom: '1px solid var(--border-light)', marginBottom: '28px', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <Link href="/dashboard" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid #D4E157', fontWeight: 600, color: 'var(--accent-olive)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
             Overview
           </Link>
-          <Link href="/dashboard/products" className="glow-hover" style={{ textDecoration: 'none', padding: '12px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+          <Link href="/dashboard/products" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
             Products ({stats.activeProducts})
           </Link>
-          <Link href="/dashboard/sales" className="glow-hover" style={{ textDecoration: 'none', padding: '12px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+          <Link href="/dashboard/sales" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
             Sales History
           </Link>
-          <Link href="/dashboard/share" className="glow-hover" style={{ textDecoration: 'none', padding: '12px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+          <Link href="/dashboard/share" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
             Share & Badges
           </Link>
-          <Link href="/dashboard/settings" className="glow-hover" style={{ textDecoration: 'none', padding: '12px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+          <Link href="/dashboard/settings" className="glow-hover" style={{ textDecoration: 'none', padding: '10px 0', borderBottom: '3px solid transparent', color: 'var(--text-secondary)', fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
             Settings
           </Link>
         </div>
 
-        {/* 4 Stat Cards with Glow Hover */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '40px' }}>
-          <div className="card glow-hover" style={{ padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+        {/* 4 Stat Cards */}
+        <div className="dashboard-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
+          <div className="card glow-hover" style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
               <span className="eyebrow">TOTAL SALES</span>
-              <TrendingUp size={18} color="var(--accent-olive)" />
+              <TrendingUp size={16} color="var(--accent-olive)" />
             </div>
-            <div className="font-display" style={{ fontSize: '2.2rem', fontWeight: 600 }}>
+            <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600 }}>
               {stats.totalSales}
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }} className="font-mono">+12 this week</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }} className="font-mono">+12 this week</div>
           </div>
 
-          <div className="card glow-hover" style={{ padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <div className="card glow-hover" style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
               <span className="eyebrow">NIM EARNED</span>
-              <DollarSign size={18} color="var(--accent-olive)" />
+              <DollarSign size={16} color="var(--accent-olive)" />
             </div>
-            <div className="font-display" style={{ fontSize: '2.2rem', fontWeight: 600, color: 'var(--accent-olive)' }}>
-              {stats.nimEarned.toLocaleString()} <small style={{ fontSize: '0.9rem' }}>NIM</small>
+            <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600, color: 'var(--accent-olive)' }}>
+              {stats.nimEarned.toLocaleString()} <small style={{ fontSize: '0.8rem' }}>NIM</small>
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }} className="font-mono">~$333.00 USD</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }} className="font-mono">~$333 USD</div>
           </div>
 
-          <div className="card glow-hover" style={{ padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <div className="card glow-hover" style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
               <span className="eyebrow">USDT EARNED</span>
-              <DollarSign size={18} color="var(--accent-olive)" />
+              <DollarSign size={16} color="var(--accent-olive)" />
             </div>
-            <div className="font-display" style={{ fontSize: '2.2rem', fontWeight: 600 }}>
-              ${stats.usdtEarned} <small style={{ fontSize: '0.9rem' }}>USDT</small>
+            <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600 }}>
+              ${stats.usdtEarned} <small style={{ fontSize: '0.8rem' }}>USDT</small>
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }} className="font-mono">Polygon EVM</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }} className="font-mono">Polygon EVM</div>
           </div>
 
-          <div className="card glow-hover" style={{ padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <div className="card glow-hover" style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
               <span className="eyebrow">ACTIVE PRODUCTS</span>
-              <Package size={18} color="var(--accent-olive)" />
+              <Package size={16} color="var(--accent-olive)" />
             </div>
-            <div className="font-display" style={{ fontSize: '2.2rem', fontWeight: 600 }}>
+            <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600 }}>
               {stats.activeProducts}
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }} className="font-mono">Published</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }} className="font-mono">Published</div>
           </div>
         </div>
 
         {/* Recent Sales Table */}
-        <div className="card" style={{ padding: '32px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-            <h3 style={{ fontSize: '1.4rem' }}>Recent Sales</h3>
-            <Link href="/dashboard/sales" style={{ fontSize: '0.85rem', color: 'var(--accent-olive)', textDecoration: 'none', fontWeight: 600 }}>
-              View all sales &rarr;
+        <div className="card" style={{ padding: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+            <h3 style={{ fontSize: '1.25rem' }}>Recent Sales</h3>
+            <Link href="/dashboard/sales" style={{ fontSize: '0.82rem', color: 'var(--accent-olive)', textDecoration: 'none', fontWeight: 600 }}>
+              View all &rarr;
             </Link>
           </div>
 
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
-            <thead>
-              <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                <th style={{ padding: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">PRODUCT</th>
-                <th style={{ padding: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">BUYER</th>
-                <th style={{ padding: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">AMOUNT</th>
-                <th style={{ padding: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">DATE</th>
-                <th style={{ padding: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">TX HASH</th>
-              </tr>
-            </thead>
-            <tbody>
-              {recentSales.map((sale) => (
-                <tr key={sale.id} style={{ borderBottom: '1px solid var(--border-light)', transition: 'background-color 150ms' }}>
-                  <td style={{ padding: '16px 12px', fontWeight: 600 }}>{sale.product}</td>
-                  <td style={{ padding: '16px 12px', color: 'var(--text-secondary)' }} className="font-mono">{sale.buyer}</td>
-                  <td style={{ padding: '16px 12px', fontWeight: 600, color: 'var(--accent-olive)' }}>{sale.amount}</td>
-                  <td style={{ padding: '16px 12px', color: 'var(--text-tertiary)' }}>{sale.date}</td>
-                  <td style={{ padding: '16px 12px', color: 'var(--text-tertiary)' }} className="font-mono">{sale.tx}</td>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem', minWidth: '500px' }}>
+              <thead>
+                <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
+                  <th style={{ padding: '10px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">PRODUCT</th>
+                  <th style={{ padding: '10px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">BUYER</th>
+                  <th style={{ padding: '10px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">AMOUNT</th>
+                  <th style={{ padding: '10px', color: 'var(--text-tertiary)', fontWeight: 500 }} className="font-mono">DATE</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {recentSales.map((sale) => (
+                  <tr key={sale.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
+                    <td style={{ padding: '14px 10px', fontWeight: 600 }}>{sale.product}</td>
+                    <td style={{ padding: '14px 10px', color: 'var(--text-secondary)' }} className="font-mono">{sale.buyer}</td>
+                    <td style={{ padding: '14px 10px', fontWeight: 600, color: 'var(--accent-olive)' }}>{sale.amount}</td>
+                    <td style={{ padding: '14px 10px', color: 'var(--text-tertiary)' }}>{sale.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .dashboard-content-main { padding: 16px 16px 120px 16px !important; }
+          .dashboard-mobile-header { display: flex !important; }
+          .dashboard-stat-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 }

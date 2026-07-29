@@ -3,106 +3,111 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import SidebarNav from '@/components/SidebarNav';
-import { Plus, Edit2, Trash2, ArrowLeft } from 'lucide-react';
+import { Plus, Edit2, Trash2, ExternalLink, Menu } from 'lucide-react';
 
 export default function ProductsPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [products] = useState([
     {
-      id: 'maya-preset-01',
+      id: '1',
       title: 'Minimalist Motion UI Kit 2026',
+      priceUsd: 29,
       category: 'DESIGN',
-      priceUsd: 29.00,
-      previewUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80',
-      salesCount: 28,
-      fileSize: '4.8 MB',
+      salesCount: 22,
+      previewUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80',
     },
     {
-      id: 'maya-preset-02',
+      id: '2',
       title: 'Editorial Typography Masterclass',
+      priceUsd: 49,
       category: 'EDUCATION',
-      priceUsd: 49.00,
-      previewUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80',
-      salesCount: 14,
-      fileSize: '1.2 GB',
+      salesCount: 12,
+      previewUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=400&q=80',
     },
     {
-      id: 'maya-preset-03',
-      title: 'Lightroom Presets - Autumn Golden Hour',
+      id: '3',
+      title: 'Lightroom Color Presets - Autumn',
+      priceUsd: 19,
       category: 'PHOTOGRAPHY',
-      priceUsd: 19.00,
-      previewUrl: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80',
-      salesCount: 36,
-      fileSize: '85 MB',
+      salesCount: 8,
+      previewUrl: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=400&q=80',
     },
   ]);
 
   return (
-    <div className="ambient-bg-wash" style={{ display: 'flex', minHeight: '100vh' }}>
-      <SidebarNav handle="mayastudio" />
+    <div className="ambient-bg-wash" style={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
+      <SidebarNav handle="mayastudio" isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div style={{ flex: 1, padding: '40px 48px', overflowY: 'auto' }}>
-        {/* Landscape Header Image */}
-        <div style={{
-          width: '100%', maxHeight: '160px', height: '160px', borderRadius: '16px', overflow: 'hidden',
-          marginBottom: '32px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)'
-        }}>
-          <img src="/images/dashboard_header_desk.jpg" alt="Products Desk Header" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div style={{ flex: 1, padding: '24px 32px 120px 32px', overflowY: 'auto', width: '100%' }} className="dashboard-content-main">
+        {/* Mobile Header Bar */}
+        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid var(--border-light)' }} className="dashboard-mobile-header">
+          <button onClick={() => setSidebarOpen(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Menu size={24} color="var(--text-primary)" />
+            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Menu</span>
+          </button>
+          <span className="font-display" style={{ fontWeight: 700, fontSize: '1.1rem' }}>Products</span>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        {/* Top Header Title & Action Button Stacking Container */}
+        <div className="mobile-stack-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28px', gap: '16px' }}>
           <div>
-            <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '6px 14px', borderRadius: '100px', marginBottom: '10px' }}>
-              <span className="eyebrow" style={{ color: 'var(--text-secondary)' }}>STOREFRONT CATALOG</span>
+            <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '8px' }}>
+              <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>STOREFRONT CATALOG</span>
             </div>
-            <h1 style={{ fontSize: '2.2rem' }}>Product Management</h1>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', lineHeight: 1.25 }}>Product Management</h1>
           </div>
 
-          <button className="btn btn-lime">
-            <Plus size={18} /> Add New Product
+          <button className="btn btn-lime btn-sm" style={{ alignSelf: 'flex-start', minWidth: '160px' }}>
+            <Plus size={16} /> Add New Product
           </button>
         </div>
 
-        {/* Product Cards Grid with Glow Hover */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-          {products.map((product) => (
-            <div key={product.id} className="card glow-hover" style={{ overflow: 'hidden' }}>
-              <div style={{ position: 'relative', height: '180px', backgroundColor: 'var(--bg-secondary)' }}>
-                <img src={product.previewUrl} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{
-                  position: 'absolute', top: '12px', right: '12px',
-                  backgroundColor: 'var(--bg-dark)', color: 'var(--accent-primary)',
-                  padding: '4px 12px', borderRadius: '100px', fontSize: '0.82rem', fontWeight: 600
-                }} className="font-mono">
-                  ${product.priceUsd.toFixed(2)}
+        {/* Products Grid */}
+        <div className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+          {products.map((p) => (
+            <div key={p.id} className="card glow-hover" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ height: '180px', backgroundColor: 'var(--bg-secondary)', position: 'relative' }}>
+                  <img src={p.previewUrl} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <span style={{
+                    position: 'absolute', top: '10px', right: '10px',
+                    backgroundColor: 'var(--bg-dark)', color: 'var(--accent-primary)',
+                    padding: '4px 10px', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 600
+                  }} className="font-mono">
+                    ${p.priceUsd}
+                  </span>
+                </div>
+                <div style={{ padding: '20px' }}>
+                  <span className="eyebrow" style={{ color: 'var(--accent-moss)', fontSize: '0.68rem', marginBottom: '4px', display: 'block' }}>
+                    {p.category}
+                  </span>
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', lineHeight: 1.3 }}>{p.title}</h3>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)' }} className="font-mono">
+                    {p.salesCount} sales • 4.8 MB
+                  </div>
                 </div>
               </div>
 
-              <div style={{ padding: '20px' }}>
-                <div className="eyebrow" style={{ color: 'var(--accent-moss)', marginBottom: '6px' }}>
-                  {product.category}
-                </div>
-                <h3 style={{ fontSize: '1.15rem', marginBottom: '12px', lineHeight: 1.3 }}>
-                  {product.title}
-                </h3>
-
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '1px solid var(--border-light)' }}>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)' }} className="font-mono">
-                    {product.salesCount} sales • {product.fileSize}
-                  </span>
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    <button style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-light)', backgroundColor: 'transparent', cursor: 'pointer' }}>
-                      <Edit2 size={16} color="var(--text-secondary)" />
-                    </button>
-                    <button style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-light)', backgroundColor: 'transparent', cursor: 'pointer' }}>
-                      <Trash2 size={16} color="#DC2626" />
-                    </button>
-                  </div>
-                </div>
+              <div style={{ padding: '0 20px 20px 20px', display: 'flex', gap: '8px' }}>
+                <button className="btn btn-ghost btn-sm" style={{ flex: 1 }}>
+                  <Edit2 size={14} /> Edit
+                </button>
+                <button className="btn btn-ghost btn-sm" style={{ color: '#B91C1C' }}>
+                  <Trash2 size={14} />
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .dashboard-content-main { padding: 16px 16px 120px 16px !important; }
+          .dashboard-mobile-header { display: flex !important; }
+          .products-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 }
