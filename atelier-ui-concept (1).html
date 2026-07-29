@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier — Your digital storefront</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FAFAF8;
+    --bg-warm: #F5F3EE;
+    --ink: #1A1A18;
+    --ink-soft: #6B6B63;
+    --ink-faint: #A3A39B;
+    --accent: #E9B213;
+    --accent-hover: #D4A00F;
+    --accent-glow: rgba(233, 178, 19, 0.12);
+    --card: #FFFFFF;
+    --border: rgba(26, 26, 24, 0.08);
+    --border-strong: rgba(26, 26, 24, 0.15);
+    --radius: 6px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 3px rgba(26,26,24,0.04);
+    --shadow-md: 0 4px 16px rgba(26,26,24,0.06);
+    --shadow-lg: 0 8px 32px rgba(26,26,24,0.08);
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250, 250, 248, 0.85);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s ease;
+  }
+  .nav.scrolled { box-shadow: var(--shadow-sm); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 32px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.35rem; font-weight: 600;
+    letter-spacing: -0.02em; color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo .logo-mark {
+    width: 28px; height: 28px; background: var(--ink);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-family: var(--font-display);
+    font-size: 16px; font-weight: 700; font-style: italic;
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 500; color: var(--ink-soft);
+    text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink); color: var(--bg); border: none;
+    padding: 10px 22px; border-radius: var(--radius);
+    font-family: var(--font-body); font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.03em; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .nav-cta:active { transform: scale(0.98); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; padding: 140px 32px 80px;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 24px; height: 1px; background: var(--ink-faint);
+  }
+  .hero h1 {
+    font-family: var(--font-display); font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 500; line-height: 1.08; letter-spacing: -0.025em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--accent);
+    background: linear-gradient(135deg, var(--accent), #D4A00F);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 1.1rem; line-height: 1.65; color: var(--ink-soft);
+    max-width: 440px; margin-bottom: 40px; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .btn-primary {
+    background: var(--accent); color: var(--ink); border: none;
+    padding: 14px 32px; border-radius: var(--radius);
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-secondary {
+    background: transparent; color: var(--ink); border: 1.5px solid var(--border-strong);
+    padding: 13px 28px; border-radius: var(--radius);
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--ink); }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    display: flex; justify-content: center;
+  }
+  .hero-phone {
+    width: 280px; height: 560px;
+    background: var(--card); border-radius: 32px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.8) inset;
+    overflow: hidden; position: relative;
+  }
+  .phone-notch {
+    width: 120px; height: 28px; background: var(--ink);
+    border-radius: 0 0 16px 16px; margin: 0 auto;
+    position: relative; z-index: 2;
+  }
+  .phone-screen { padding: 12px 16px; }
+  .phone-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-top: 8px;
+  }
+  .phone-store-name {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+  }
+  .phone-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #E8D5B7, #C4A882);
+  }
+  .phone-product {
+    background: var(--bg-warm); border-radius: 10px; overflow: hidden;
+    margin-bottom: 12px; transition: transform 0.2s;
+  }
+  .phone-product:hover { transform: scale(1.02); }
+  .phone-product-img {
+    width: 100%; height: 140px; object-fit: cover;
+    display: block;
+  }
+  .phone-product-img.preset {
+    background: linear-gradient(135deg, #2D1B69, #6B3FA0, #E8A0BF);
+  }
+  .phone-product-img.photo {
+    background: linear-gradient(135deg, #1a3a2a, #3d7a5a, #7ab89a);
+  }
+  .phone-product-img.template {
+    background: linear-gradient(135deg, #1a2840, #2d4a7a, #5a8abd);
+  }
+  .phone-product-info { padding: 12px 14px; }
+  .phone-product-title {
+    font-size: 0.82rem; font-weight: 600; margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .phone-product-price {
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .price-nim {
+    background: var(--accent-glow); color: #8B6914;
+    padding: 2px 8px; border-radius: 4px; font-weight: 500;
+  }
+
+  /* Floating badge */
+  .hero-badge {
+    position: absolute; top: -10px; right: -30px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 14px 18px;
+    box-shadow: var(--shadow-lg); width: 180px;
+    animation: float 6s ease-in-out infinite;
+  }
+  .badge-label {
+    font-family: var(--font-mono); font-size: 0.62rem; font-weight: 500;
+    color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .badge-value {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
+    color: var(--ink); display: flex; align-items: baseline; gap: 4px;
+  }
+  .badge-value small { font-size: 0.7rem; color: var(--ink-soft); font-family: var(--font-body); }
+  .badge-sub { font-size: 0.68rem; color: var(--ink-faint); margin-top: 4px; }
+
+  .hero-badge-2 {
+    position: absolute; bottom: 30px; left: -40px;
+    background: var(--ink); color: var(--bg);
+    border-radius: var(--radius-lg); padding: 14px 18px;
+    box-shadow: var(--shadow-lg); width: 170px;
+    animation: float 6s ease-in-out 2s infinite;
+  }
+  .badge-2-icon { font-size: 1.2rem; margin-bottom: 6px; }
+  .badge-2-text {
+    font-size: 0.78rem; font-weight: 500; line-height: 1.4;
+  }
+  .badge-2-sub {
+    font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-faint);
+    margin-top: 6px;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* ── METRICS BAR ── */
+  .metrics {
+    background: var(--ink);
+    padding: 0 32px;
+  }
+  .metrics-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+  }
+  .metric {
+    padding: 36px 24px; text-align: center;
+    position: relative;
+  }
+  .metric + .metric::before {
+    content: ''; position: absolute; left: 0; top: 20%; bottom: 20%;
+    width: 1px; background: rgba(250,250,248,0.1);
+  }
+  .metric-value {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 500;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .metric-label {
+    font-family: var(--font-mono); font-size: 0.65rem; color: rgba(250,250,248,0.4);
+    text-transform: uppercase; letter-spacing: 0.12em;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    padding: 120px 32px; background: var(--bg);
+  }
+  .how-inner { max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow {
+    font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 500; line-height: 1.15; letter-spacing: -0.02em;
+    margin-bottom: 64px; max-width: 600px;
+  }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+  .step {
+    background: var(--card); padding: 40px 28px;
+    border-radius: var(--radius); position: relative;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .step:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .step-number {
+    font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+    color: var(--ink-faint); letter-spacing: 0.1em;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .step-number::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .step-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 20px;
+  }
+  .step:nth-child(1) .step-icon { background: #FFF3D0; }
+  .step:nth-child(2) .step-icon { background: #E8F4E8; }
+  .step:nth-child(3) .step-icon { background: #E8ECF4; }
+  .step:nth-child(4) .step-icon { background: #F4E8F0; }
+  .step-title {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 600;
+    margin-bottom: 10px; letter-spacing: -0.01em;
+  }
+  .step-desc {
+    font-size: 0.85rem; color: var(--ink-soft); line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── STOREFRONT PREVIEW ── */
+  .preview {
+    padding: 120px 32px; background: var(--bg-warm);
+  }
+  .preview-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center;
+  }
+  .preview-content { }
+  .preview-screen {
+    background: var(--card); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .screen-bar {
+    height: 40px; background: var(--bg); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 16px; gap: 8px;
+  }
+  .screen-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .screen-dot.r { background: #FF6059; }
+  .screen-dot.y { background: #FFBD2E; }
+  .screen-dot.g { background: #28C840; }
+  .screen-url {
+    flex: 1; text-align: center;
+    font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-faint);
+  }
+  .screen-body { padding: 32px; }
+  .screen-store-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+  }
+  .screen-store-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, #E8D5B7, #C4A882);
+    flex-shrink: 0;
+  }
+  .screen-store-name {
+    font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+  }
+  .screen-store-bio {
+    font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px;
+  }
+  .screen-store-tag {
+    font-family: var(--font-mono); font-size: 0.6rem; color: var(--ink-faint);
+    margin-top: 4px; letter-spacing: 0.05em;
+  }
+  .screen-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .screen-item {
+    border-radius: 8px; overflow: hidden; border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .screen-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .screen-item-img {
+    width: 100%; height: 100px; display: block;
+  }
+  .si-1 { background: linear-gradient(135deg, #2D1B69, #6B3FA0, #E8A0BF); }
+  .si-2 { background: linear-gradient(135deg, #1a3a2a, #3d7a5a, #7ab89a); }
+  .si-3 { background: linear-gradient(135deg, #3a2a1a, #7a5a3d, #b89a7a); }
+  .si-4 { background: linear-gradient(135deg, #1a2840, #2d4a7a, #5a8abd); }
+  .si-5 { background: linear-gradient(135deg, #401a28, #7a2d4a, #bd5a8a); }
+  .si-6 { background: linear-gradient(135deg, #28401a, #4a7a2d, #8abd5a); }
+  .screen-item-info { padding: 10px 10px 12px; }
+  .screen-item-name { font-size: 0.72rem; font-weight: 600; margin-bottom: 3px; }
+  .screen-item-price {
+    font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-soft);
+  }
+
+  .feature-list { margin-top: 40px; }
+  .feature-item {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .feature-item:last-child { border-bottom: none; }
+  .feature-check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent-glow); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .feature-text { font-size: 0.88rem; color: var(--ink); font-weight: 400; }
+  .feature-text strong { font-weight: 600; }
+
+  /* ── CATEGORIES ── */
+  .categories { padding: 120px 32px; background: var(--bg); }
+  .categories-inner { max-width: 1200px; margin: 0 auto; }
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin-top: 48px;
+  }
+  .cat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 28px 24px;
+    transition: all 0.3s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .cat-card:hover {
+    border-color: var(--accent); transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .cat-icon {
+    font-size: 1.6rem; margin-bottom: 16px;
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-warm);
+  }
+  .cat-name {
+    font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .cat-desc {
+    font-size: 0.78rem; color: var(--ink-soft); line-height: 1.5;
+  }
+  .cat-count {
+    font-family: var(--font-mono); font-size: 0.6rem; color: var(--ink-faint);
+    margin-top: 12px; letter-spacing: 0.05em;
+  }
+
+  /* ── COMPARISON ── */
+  .comparison { padding: 120px 32px; background: var(--ink); color: var(--bg); }
+  .comparison-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .comparison .section-eyebrow { color: rgba(250,250,248,0.35); }
+  .comparison .section-title { color: var(--bg); margin-left: auto; margin-right: auto; }
+  .comp-table {
+    width: 100%; border-collapse: collapse; margin-top: 48px; text-align: left;
+  }
+  .comp-table th {
+    font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+    color: rgba(250,250,248,0.35); text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 16px 20px; border-bottom: 1px solid rgba(250,250,248,0.1);
+  }
+  .comp-table th:last-child { color: var(--accent); }
+  .comp-table td {
+    padding: 18px 20px; border-bottom: 1px solid rgba(250,250,248,0.06);
+    font-size: 0.85rem; color: rgba(250,250,248,0.6);
+  }
+  .comp-table td:first-child { color: rgba(250,250,248,0.85); font-weight: 500; }
+  .comp-table td:last-child { color: var(--accent); font-weight: 600; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-check { color: var(--accent); }
+  .comp-x { color: rgba(250,250,248,0.2); }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 120px 32px;
+    background: var(--bg-warm);
+    text-align: center;
+  }
+  .cta-inner { max-width: 640px; margin: 0 auto; }
+  .cta-section h2 {
+    font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 500; line-height: 1.12; letter-spacing: -0.025em;
+    margin-bottom: 20px;
+  }
+  .cta-section p {
+    font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 40px;
+    font-weight: 300; line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 48px 32px; border-top: 1px solid var(--border);
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-left {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footer-left .logo-mark {
+    width: 22px; height: 22px; background: var(--ink);
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-family: var(--font-display);
+    font-size: 12px; font-weight: 700; font-style: italic;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 0.78rem; color: var(--ink-faint); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-right {
+    font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { order: -1; }
+    .hero-badge { right: 0; top: -5px; }
+    .hero-badge-2 { left: 0; bottom: 10px; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .preview-inner { grid-template-columns: 1fr; gap: 48px; }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .metrics-inner { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .steps { grid-template-columns: 1fr; }
+    .cat-grid { grid-template-columns: 1fr; }
+    .metrics-inner { grid-template-columns: 1fr; }
+    .metric + .metric::before { display: none; }
+    .hero-badge, .hero-badge-2 { display: none; }
+    .hero { padding: 120px 20px 60px; }
+    .screen-grid { grid-template-columns: repeat(2, 1fr); }
+    .comp-table { font-size: 0.75rem; }
+    .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="logo-mark">A</span>
+      Atelier
+    </div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#creators">For creators</a>
+      <a href="#categories">Categories</a>
+    </div>
+    <button class="nav-cta">Connect Nimiq</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">A Nimiq Pay Mini App</div>
+      <h1>Your digital storefront.<br>One link.<br><em>Instant NIM.</em></h1>
+      <p class="hero-sub">
+        Sell presets, templates, art, guides, music, and code directly from your wallet. Zero platform fees. Payments settle in seconds, not days.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary">
+          Open your Atelier
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn-secondary">See how it works</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-store-name">Maya Studio</div>
+            <div class="phone-avatar"></div>
+          </div>
+          <div class="phone-product">
+            <div class="phone-product-img preset"></div>
+            <div class="phone-product-info">
+              <div class="phone-product-title">Lightroom Sunset Pack</div>
+              <div class="phone-product-price">
+                $12.00 <span class="price-nim">120 NIM</span>
+              </div>
+            </div>
+          </div>
+          <div class="phone-product">
+            <div class="phone-product-img photo"></div>
+            <div class="phone-product-info">
+              <div class="phone-product-title">Street Photography Vol. 2</div>
+              <div class="phone-product-price">
+                $8.00 <span class="price-nim">80 NIM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-label">Today's earnings</div>
+        <div class="badge-value">340 <small>NIM</small></div>
+        <div class="badge-sub">3 sales this morning</div>
+      </div>
+      <div class="hero-badge-2">
+        <div class="badge-2-icon">&#10003;</div>
+        <div class="badge-2-text">Payment verified on-chain</div>
+        <div class="badge-2-sub">tx confirmed in 2.1s</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metrics-inner">
+    <div class="metric">
+      <div class="metric-value">0%</div>
+      <div class="metric-label">Platform fees</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">&lt;3s</div>
+      <div class="metric-label">Payment settlement</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">NIM + USDT</div>
+      <div class="metric-label">Accepted currencies</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">Wallet</div>
+      <div class="metric-label">Your only login</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">From connect to first sale in under sixty seconds</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-icon">&#128274;</div>
+        <div class="step-title">Connect wallet</div>
+        <div class="step-desc">Open inside Nimiq Pay and sign in with your wallet. No email, no password, no account to create.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-icon">&#127912;</div>
+        <div class="step-title">Build your storefront</div>
+        <div class="step-desc">Pick a name, add a bio and avatar, choose your accent color. Your storefront is live at atelier.app/you.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-icon">&#128230;</div>
+        <div class="step-title">Upload your work</div>
+        <div class="step-desc">Add products with a title, preview image, price in any fiat currency, and the downloadable file. Unlimited products.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <div class="step-icon">&#9889;</div>
+        <div class="step-title">Get paid instantly</div>
+        <div class="step-desc">Share your link. Buyers pay in NIM or USDT, verified on-chain, and get instant file access. You keep 100%.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STOREFRONT PREVIEW -->
+<section class="preview" id="creators">
+  <div class="preview-inner">
+    <div class="preview-content">
+      <div class="section-eyebrow">For creators</div>
+      <h2 class="section-title">A storefront that makes your work look as good as it is</h2>
+      <p style="color: var(--ink-soft); font-size: 0.95rem; line-height: 1.65; font-weight: 300; margin-bottom: 20px;">
+        Every creator gets a beautiful, shareable page. No templates to fight, no themes to configure. Upload your products and the layout does the rest.
+      </p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-check">&#10003;</div>
+          <div class="feature-text"><strong>Wallet-signature authentication</strong> with Ed25519 nonce challenge</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">&#10003;</div>
+          <div class="feature-text"><strong>On-chain payment verification</strong> via Nimiq RPC + Polygon RPC with explorer fallback</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">&#10003;</div>
+          <div class="feature-text"><strong>Cryptographic purchase receipts</strong> signed by creator wallet, verifiable by anyone</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">&#10003;</div>
+          <div class="feature-text"><strong>Live fiat conversion</strong> with CoinGecko quotes, 5-min validity, auto-refresh</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">&#10003;</div>
+          <div class="feature-text"><strong>Earnings dashboard</strong> with period filters, product analytics, and CSV export</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">&#10003;</div>
+          <div class="feature-text"><strong>Share kit</strong> with social templates, QR code, embeddable badge for your README</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-screen">
+      <div class="screen-bar">
+        <span class="screen-dot r"></span>
+        <span class="screen-dot y"></span>
+        <span class="screen-dot g"></span>
+        <span class="screen-url">atelier.app/mayastudio</span>
+      </div>
+      <div class="screen-body">
+        <div class="screen-store-header">
+          <div class="screen-store-avatar"></div>
+          <div>
+            <div class="screen-store-name">Maya Studio</div>
+            <div class="screen-store-bio">Photographer and preset designer from Lisbon</div>
+            <div class="screen-store-tag">NQ42 B9H7 &#183; 12 products &#183; 89 sales</div>
+          </div>
+        </div>
+        <div class="screen-grid">
+          <div class="screen-item">
+            <div class="screen-item-img si-1"></div>
+            <div class="screen-item-info">
+              <div class="screen-item-name">Sunset Pack</div>
+              <div class="screen-item-price">120 NIM</div>
+            </div>
+          </div>
+          <div class="screen-item">
+            <div class="screen-item-img si-2"></div>
+            <div class="screen-item-info">
+              <div class="screen-item-name">Street Vol. 2</div>
+              <div class="screen-item-price">80 NIM</div>
+            </div>
+          </div>
+          <div class="screen-item">
+            <div class="screen-item-img si-3"></div>
+            <div class="screen-item-info">
+              <div class="screen-item-name">Grain Overlay</div>
+              <div class="screen-item-price">45 NIM</div>
+            </div>
+          </div>
+          <div class="screen-item">
+            <div class="screen-item-img si-4"></div>
+            <div class="screen-item-info">
+              <div class="screen-item-name">Brand Kit</div>
+              <div class="screen-item-price">200 NIM</div>
+            </div>
+          </div>
+          <div class="screen-item">
+            <div class="screen-item-img si-5"></div>
+            <div class="screen-item-info">
+              <div class="screen-item-name">Portrait Guide</div>
+              <div class="screen-item-price">60 NIM</div>
+            </div>
+          </div>
+          <div class="screen-item">
+            <div class="screen-item-img si-6"></div>
+            <div class="screen-item-info">
+              <div class="screen-item-name">Color Theory</div>
+              <div class="screen-item-price">35 NIM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="categories-inner">
+    <div class="section-eyebrow">What you can sell</div>
+    <h2 class="section-title">If it's digital and it's yours, it belongs on Atelier</h2>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <div class="cat-icon">&#127912;</div>
+        <div class="cat-name">Design</div>
+        <div class="cat-desc">Templates, UI kits, Figma files, icon packs, brand assets</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">&#128247;</div>
+        <div class="cat-name">Photography</div>
+        <div class="cat-desc">Lightroom presets, stock packs, editing guides, LUTs</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">&#127925;</div>
+        <div class="cat-name">Audio</div>
+        <div class="cat-desc">Sample packs, beats, sound effects, production templates</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">&#128187;</div>
+        <div class="cat-name">Code</div>
+        <div class="cat-desc">Boilerplates, scripts, plugins, Notion templates, tools</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">&#128218;</div>
+        <div class="cat-name">Education</div>
+        <div class="cat-desc">Courses, tutorials, worksheets, cheatsheets, guides</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">&#127916;</div>
+        <div class="cat-name">Video</div>
+        <div class="cat-desc">Motion templates, transitions, overlays, editing packs</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">&#9997;</div>
+        <div class="cat-name">Writing</div>
+        <div class="cat-desc">Ebooks, newsletters, prompt libraries, copy frameworks</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">&#128301;</div>
+        <div class="cat-name">Digital art</div>
+        <div class="cat-desc">Illustrations, wallpapers, 3D assets, texture packs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison">
+  <div class="comparison-inner">
+    <div class="section-eyebrow">Why Atelier</div>
+    <h2 class="section-title">Keep what you earn</h2>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Gumroad</th>
+          <th>Payhip</th>
+          <th>Atelier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Platform fee</td>
+          <td>10%</td>
+          <td>5%</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <td>Payment processing</td>
+          <td>2.9% + $0.30</td>
+          <td>2.9% + $0.30</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Payout speed</td>
+          <td>7-14 days</td>
+          <td>1-2 days</td>
+          <td>Seconds</td>
+        </tr>
+        <tr>
+          <td>Account required</td>
+          <td>Email + password</td>
+          <td>Email + password</td>
+          <td>Wallet only</td>
+        </tr>
+        <tr>
+          <td>Chargebacks</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Impossible</td>
+        </tr>
+        <tr>
+          <td>Data collected</td>
+          <td>Everything</td>
+          <td>Email, name, IP</td>
+          <td>Wallet address</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Your work deserves a<br>storefront without a middleman</h2>
+    <p>Connect your Nimiq wallet and start selling in under a minute. No signup form, no platform fee, no waiting for payouts.</p>
+    <button class="btn-primary" style="margin: 0 auto; font-size: 1rem; padding: 16px 40px;">
+      Open your Atelier
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="logo-mark">A</span>
+      Atelier
+    </div>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">Documentation</a>
+      <a href="#">Nimiq Pay</a>
+      <a href="#">Competition</a>
+    </div>
+    <div class="footer-right">
+      Built for Nimiq Pay &middot; MIT License
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Subtle entrance animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.step, .cat-card, .screen-item, .feature-item, .metric').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
