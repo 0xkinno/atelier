@@ -1,11 +1,1 @@
-{
-  "/[handle]/page": "app/[handle]/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/products/page": "app/dashboard/products/page.js",
-  "/dashboard/sales/page": "app/dashboard/sales/page.js",
-  "/dashboard/settings/page": "app/dashboard/settings/page.js",
-  "/dashboard/share/page": "app/dashboard/share/page.js",
-  "/explore/page": "app/explore/page.js",
-  "/page": "app/page.js",
-  "/purchases/page": "app/purchases/page.js"
-}
+{}

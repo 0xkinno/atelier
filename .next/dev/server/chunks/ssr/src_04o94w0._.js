@@ -512,7 +512,7 @@ function DashboardPage() {
             minHeight: '100vh',
             position: 'relative'
         },
-        className: "jsx-ec921abea6bac2d0" + " " + "ambient-bg-wash",
+        className: "jsx-f46b8de0a2a310ae" + " " + "ambient-bg-wash",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SidebarNav$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 handle: profile.handle,
@@ -530,7 +530,7 @@ function DashboardPage() {
                     overflowY: 'auto',
                     width: '100%'
                 },
-                className: "jsx-ec921abea6bac2d0" + " " + "dashboard-content-main",
+                className: "jsx-f46b8de0a2a310ae" + " " + "dashboard-content-main",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
@@ -541,7 +541,7 @@ function DashboardPage() {
                             paddingBottom: '12px',
                             borderBottom: '1px solid var(--border-light)'
                         },
-                        className: "jsx-ec921abea6bac2d0" + " " + "dashboard-mobile-header",
+                        className: "jsx-f46b8de0a2a310ae" + " " + "dashboard-mobile-header",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>setSidebarOpen(true),
@@ -554,7 +554,7 @@ function DashboardPage() {
                                     alignItems: 'center',
                                     gap: '8px'
                                 },
-                                className: "jsx-ec921abea6bac2d0",
+                                className: "jsx-f46b8de0a2a310ae",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Menu$3e$__["Menu"], {
                                         size: 24,
@@ -569,7 +569,7 @@ function DashboardPage() {
                                             fontWeight: 600,
                                             fontSize: '0.9rem'
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: "Menu"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -587,7 +587,7 @@ function DashboardPage() {
                                     fontWeight: 700,
                                     fontSize: '1.1rem'
                                 },
-                                className: "jsx-ec921abea6bac2d0" + " " + "font-display",
+                                className: "jsx-f46b8de0a2a310ae" + " " + "font-display",
                                 children: "Atelier"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/dashboard/page.tsx",
@@ -611,7 +611,7 @@ function DashboardPage() {
                             boxShadow: 'var(--shadow-md)',
                             border: '1px solid var(--border-light)'
                         },
-                        className: "jsx-ec921abea6bac2d0" + " " + "img-hover",
+                        className: "jsx-f46b8de0a2a310ae" + " " + "img-hover",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                             src: "/images/dashboard_header_desk.jpg",
                             alt: "Dashboard Desk Header",
@@ -620,7 +620,7 @@ function DashboardPage() {
                                 height: '100%',
                                 objectFit: 'cover'
                             },
-                            className: "jsx-ec921abea6bac2d0"
+                            className: "jsx-f46b8de0a2a310ae"
                         }, void 0, false, {
                             fileName: "[project]/src/app/dashboard/page.tsx",
                             lineNumber: 56,
@@ -633,16 +633,12 @@ function DashboardPage() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start',
-                            marginBottom: '24px',
-                            gap: '16px'
+                            marginBottom: '24px'
                         },
-                        className: "jsx-ec921abea6bac2d0" + " " + "mobile-stack-header",
+                        className: "jsx-f46b8de0a2a310ae" + " " + "layout-stack-header",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-ec921abea6bac2d0",
+                                className: "jsx-f46b8de0a2a310ae",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
@@ -652,13 +648,13 @@ function DashboardPage() {
                                             borderRadius: '100px',
                                             marginBottom: '6px'
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             style: {
                                                 color: 'var(--text-secondary)',
                                                 fontSize: '0.68rem'
                                             },
-                                            className: "jsx-ec921abea6bac2d0" + " " + "eyebrow",
+                                            className: "jsx-f46b8de0a2a310ae" + " " + "eyebrow",
                                             children: "CREATOR DASHBOARD"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/dashboard/page.tsx",
@@ -672,10 +668,10 @@ function DashboardPage() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                         style: {
-                                            fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
+                                            fontSize: 'clamp(1.5rem, 4vw, 2.2rem)',
                                             lineHeight: 1.25
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: [
                                             "Welcome back, ",
                                             profile.displayName
@@ -697,7 +693,7 @@ function DashboardPage() {
                                     gap: '10px',
                                     flexWrap: 'wrap'
                                 },
-                                className: "jsx-ec921abea6bac2d0",
+                                className: "jsx-f46b8de0a2a310ae",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/dashboard/products",
@@ -750,14 +746,9 @@ function DashboardPage() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            display: 'flex',
-                            gap: '20px',
-                            borderBottom: '1px solid var(--border-light)',
-                            marginBottom: '28px',
-                            overflowX: 'auto',
-                            WebkitOverflowScrolling: 'touch'
+                            marginBottom: '28px'
                         },
-                        className: "jsx-ec921abea6bac2d0" + " " + "mobile-tabs-scroll",
+                        className: "jsx-f46b8de0a2a310ae" + " " + "layout-tabs-scroll",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 href: "/dashboard",
@@ -767,8 +758,7 @@ function DashboardPage() {
                                     borderBottom: '3px solid #D4E157',
                                     fontWeight: 600,
                                     color: 'var(--accent-olive)',
-                                    fontSize: '0.88rem',
-                                    whiteSpace: 'nowrap'
+                                    fontSize: '0.88rem'
                                 },
                                 children: "Overview"
                             }, void 0, false, {
@@ -784,8 +774,7 @@ function DashboardPage() {
                                     padding: '10px 0',
                                     borderBottom: '3px solid transparent',
                                     color: 'var(--text-secondary)',
-                                    fontSize: '0.88rem',
-                                    whiteSpace: 'nowrap'
+                                    fontSize: '0.88rem'
                                 },
                                 children: [
                                     "Products (",
@@ -805,8 +794,7 @@ function DashboardPage() {
                                     padding: '10px 0',
                                     borderBottom: '3px solid transparent',
                                     color: 'var(--text-secondary)',
-                                    fontSize: '0.88rem',
-                                    whiteSpace: 'nowrap'
+                                    fontSize: '0.88rem'
                                 },
                                 children: "Sales History"
                             }, void 0, false, {
@@ -822,8 +810,7 @@ function DashboardPage() {
                                     padding: '10px 0',
                                     borderBottom: '3px solid transparent',
                                     color: 'var(--text-secondary)',
-                                    fontSize: '0.88rem',
-                                    whiteSpace: 'nowrap'
+                                    fontSize: '0.88rem'
                                 },
                                 children: "Share & Badges"
                             }, void 0, false, {
@@ -839,8 +826,7 @@ function DashboardPage() {
                                     padding: '10px 0',
                                     borderBottom: '3px solid transparent',
                                     color: 'var(--text-secondary)',
-                                    fontSize: '0.88rem',
-                                    whiteSpace: 'nowrap'
+                                    fontSize: '0.88rem'
                                 },
                                 children: "Settings"
                             }, void 0, false, {
@@ -856,18 +842,15 @@ function DashboardPage() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(4, 1fr)',
-                            gap: '16px',
                             marginBottom: '32px'
                         },
-                        className: "jsx-ec921abea6bac2d0" + " " + "dashboard-stat-grid",
+                        className: "jsx-f46b8de0a2a310ae" + " " + "grid-stats",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
                                     padding: '20px'
                                 },
-                                className: "jsx-ec921abea6bac2d0" + " " + "card glow-hover",
+                                className: "jsx-f46b8de0a2a310ae" + " " + "card glow-hover",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
@@ -876,10 +859,10 @@ function DashboardPage() {
                                             alignItems: 'center',
                                             marginBottom: '10px'
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "jsx-ec921abea6bac2d0" + " " + "eyebrow",
+                                                className: "jsx-f46b8de0a2a310ae" + " " + "eyebrow",
                                                 children: "TOTAL SALES"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/page.tsx",
@@ -905,7 +888,7 @@ function DashboardPage() {
                                             fontSize: '1.8rem',
                                             fontWeight: 600
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-display",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-display",
                                         children: stats.totalSales
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -917,7 +900,7 @@ function DashboardPage() {
                                             fontSize: '0.75rem',
                                             color: 'var(--text-tertiary)'
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                         children: "+12 this week"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -934,7 +917,7 @@ function DashboardPage() {
                                 style: {
                                     padding: '20px'
                                 },
-                                className: "jsx-ec921abea6bac2d0" + " " + "card glow-hover",
+                                className: "jsx-f46b8de0a2a310ae" + " " + "card glow-hover",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
@@ -943,10 +926,10 @@ function DashboardPage() {
                                             alignItems: 'center',
                                             marginBottom: '10px'
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "jsx-ec921abea6bac2d0" + " " + "eyebrow",
+                                                className: "jsx-f46b8de0a2a310ae" + " " + "eyebrow",
                                                 children: "NIM EARNED"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/page.tsx",
@@ -973,7 +956,7 @@ function DashboardPage() {
                                             fontWeight: 600,
                                             color: 'var(--accent-olive)'
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-display",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-display",
                                         children: [
                                             stats.nimEarned.toLocaleString(),
                                             " ",
@@ -981,7 +964,7 @@ function DashboardPage() {
                                                 style: {
                                                     fontSize: '0.8rem'
                                                 },
-                                                className: "jsx-ec921abea6bac2d0",
+                                                className: "jsx-f46b8de0a2a310ae",
                                                 children: "NIM"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/page.tsx",
@@ -999,7 +982,7 @@ function DashboardPage() {
                                             fontSize: '0.75rem',
                                             color: 'var(--text-tertiary)'
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                         children: "~$333 USD"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1016,7 +999,7 @@ function DashboardPage() {
                                 style: {
                                     padding: '20px'
                                 },
-                                className: "jsx-ec921abea6bac2d0" + " " + "card glow-hover",
+                                className: "jsx-f46b8de0a2a310ae" + " " + "card glow-hover",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
@@ -1025,10 +1008,10 @@ function DashboardPage() {
                                             alignItems: 'center',
                                             marginBottom: '10px'
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "jsx-ec921abea6bac2d0" + " " + "eyebrow",
+                                                className: "jsx-f46b8de0a2a310ae" + " " + "eyebrow",
                                                 children: "USDT EARNED"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1054,7 +1037,7 @@ function DashboardPage() {
                                             fontSize: '1.8rem',
                                             fontWeight: 600
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-display",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-display",
                                         children: [
                                             "$",
                                             stats.usdtEarned,
@@ -1063,7 +1046,7 @@ function DashboardPage() {
                                                 style: {
                                                     fontSize: '0.8rem'
                                                 },
-                                                className: "jsx-ec921abea6bac2d0",
+                                                className: "jsx-f46b8de0a2a310ae",
                                                 children: "USDT"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1081,7 +1064,7 @@ function DashboardPage() {
                                             fontSize: '0.75rem',
                                             color: 'var(--text-tertiary)'
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                         children: "Polygon EVM"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1098,7 +1081,7 @@ function DashboardPage() {
                                 style: {
                                     padding: '20px'
                                 },
-                                className: "jsx-ec921abea6bac2d0" + " " + "card glow-hover",
+                                className: "jsx-f46b8de0a2a310ae" + " " + "card glow-hover",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
@@ -1107,10 +1090,10 @@ function DashboardPage() {
                                             alignItems: 'center',
                                             marginBottom: '10px'
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "jsx-ec921abea6bac2d0" + " " + "eyebrow",
+                                                className: "jsx-f46b8de0a2a310ae" + " " + "eyebrow",
                                                 children: "ACTIVE PRODUCTS"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1136,7 +1119,7 @@ function DashboardPage() {
                                             fontSize: '1.8rem',
                                             fontWeight: 600
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-display",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-display",
                                         children: stats.activeProducts
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1148,7 +1131,7 @@ function DashboardPage() {
                                             fontSize: '0.75rem',
                                             color: 'var(--text-tertiary)'
                                         },
-                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                         children: "Published"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1171,7 +1154,7 @@ function DashboardPage() {
                         style: {
                             padding: '24px'
                         },
-                        className: "jsx-ec921abea6bac2d0" + " " + "card",
+                        className: "jsx-f46b8de0a2a310ae" + " " + "card",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
@@ -1180,13 +1163,13 @@ function DashboardPage() {
                                     alignItems: 'center',
                                     marginBottom: '20px'
                                 },
-                                className: "jsx-ec921abea6bac2d0",
+                                className: "jsx-f46b8de0a2a310ae",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                         style: {
                                             fontSize: '1.25rem'
                                         },
-                                        className: "jsx-ec921abea6bac2d0",
+                                        className: "jsx-f46b8de0a2a310ae",
                                         children: "Recent Sales"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1214,11 +1197,7 @@ function DashboardPage() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                style: {
-                                    overflowX: 'auto',
-                                    WebkitOverflowScrolling: 'touch'
-                                },
-                                className: "jsx-ec921abea6bac2d0",
+                                className: "jsx-f46b8de0a2a310ae" + " " + "layout-table-wrapper",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
                                     style: {
                                         width: '100%',
@@ -1227,15 +1206,15 @@ function DashboardPage() {
                                         fontSize: '0.88rem',
                                         minWidth: '500px'
                                     },
-                                    className: "jsx-ec921abea6bac2d0",
+                                    className: "jsx-f46b8de0a2a310ae",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
-                                            className: "jsx-ec921abea6bac2d0",
+                                            className: "jsx-f46b8de0a2a310ae",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                 style: {
                                                     borderBottom: '1px solid var(--border-light)'
                                                 },
-                                                className: "jsx-ec921abea6bac2d0",
+                                                className: "jsx-f46b8de0a2a310ae",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                         style: {
@@ -1243,7 +1222,7 @@ function DashboardPage() {
                                                             color: 'var(--text-tertiary)',
                                                             fontWeight: 500
                                                         },
-                                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                                         children: "PRODUCT"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1256,7 +1235,7 @@ function DashboardPage() {
                                                             color: 'var(--text-tertiary)',
                                                             fontWeight: 500
                                                         },
-                                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                                         children: "BUYER"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1269,7 +1248,7 @@ function DashboardPage() {
                                                             color: 'var(--text-tertiary)',
                                                             fontWeight: 500
                                                         },
-                                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                                         children: "AMOUNT"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1282,7 +1261,7 @@ function DashboardPage() {
                                                             color: 'var(--text-tertiary)',
                                                             fontWeight: 500
                                                         },
-                                                        className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                                        className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                                         children: "DATE"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1301,19 +1280,19 @@ function DashboardPage() {
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
-                                            className: "jsx-ec921abea6bac2d0",
+                                            className: "jsx-f46b8de0a2a310ae",
                                             children: recentSales.map((sale)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                     style: {
                                                         borderBottom: '1px solid var(--border-light)'
                                                     },
-                                                    className: "jsx-ec921abea6bac2d0",
+                                                    className: "jsx-f46b8de0a2a310ae",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                             style: {
                                                                 padding: '14px 10px',
                                                                 fontWeight: 600
                                                             },
-                                                            className: "jsx-ec921abea6bac2d0",
+                                                            className: "jsx-f46b8de0a2a310ae",
                                                             children: sale.product
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1325,7 +1304,7 @@ function DashboardPage() {
                                                                 padding: '14px 10px',
                                                                 color: 'var(--text-secondary)'
                                                             },
-                                                            className: "jsx-ec921abea6bac2d0" + " " + "font-mono",
+                                                            className: "jsx-f46b8de0a2a310ae" + " " + "font-mono",
                                                             children: sale.buyer
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1338,7 +1317,7 @@ function DashboardPage() {
                                                                 fontWeight: 600,
                                                                 color: 'var(--accent-olive)'
                                                             },
-                                                            className: "jsx-ec921abea6bac2d0",
+                                                            className: "jsx-f46b8de0a2a310ae",
                                                             children: sale.amount
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1350,7 +1329,7 @@ function DashboardPage() {
                                                                 padding: '14px 10px',
                                                                 color: 'var(--text-tertiary)'
                                                             },
-                                                            className: "jsx-ec921abea6bac2d0",
+                                                            className: "jsx-f46b8de0a2a310ae",
                                                             children: sale.date
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/dashboard/page.tsx",
@@ -1392,8 +1371,8 @@ function DashboardPage() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                id: "ec921abea6bac2d0",
-                children: "@media (width<=768px){.dashboard-content-main{padding:16px 16px 120px!important}.dashboard-mobile-header{display:flex!important}.dashboard-stat-grid{grid-template-columns:1fr!important}}"
+                id: "f46b8de0a2a310ae",
+                children: "@media (width<=768px){.dashboard-content-main{padding:16px 16px 120px!important}.dashboard-mobile-header{display:flex!important}}"
             }, void 0, false, void 0, this)
         ]
     }, void 0, true, {

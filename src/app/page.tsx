@@ -182,7 +182,7 @@ export default function LandingPage() {
               </div>
 
               <div className="animate-float glow-hover" style={{
-                position: 'absolute', top: '-20px', right: '-20px',
+                position: 'absolute', top: '-45px', right: '10px',
                 backgroundColor: 'var(--bg-card)', borderRadius: '16px', padding: '20px',
                 boxShadow: 'var(--shadow-float)', border: '1px solid var(--border-medium)', width: '220px',
                 zIndex: 10
@@ -197,7 +197,7 @@ export default function LandingPage() {
               </div>
 
               <div className="animate-float-slow glow-hover" style={{
-                position: 'absolute', bottom: '30px', left: '-30px',
+                position: 'absolute', bottom: '-25px', left: '-20px',
                 backgroundColor: 'var(--bg-dark)', color: 'var(--text-on-dark)',
                 borderRadius: '16px', padding: '18px 22px',
                 boxShadow: 'var(--shadow-float)', width: '210px', zIndex: 10
