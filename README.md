@@ -40,7 +40,7 @@
 |---|---|
 | **Live App** | [atelier-fawn-seven-53.vercel.app](https://atelier-fawn-seven-53.vercel.app) |
 | **GitHub** | [github.com/0xkinno/atelier](https://github.com/0xkinno/atelier) |
-| **Demo Video** | [Watch on YouTube](#) |
+| **Demo Video** | [Watch on YouTube](https://youtu.be/ugT1-2piNLY?si=9UaadsKQzxxgUail) |
 | **Competition** | Nimiq Mini Apps Competition, Cycle I |
 
 ---
