@@ -1,10 +1,6 @@
 # Atelier
 
 <p align="center">
-  <img src="public/images/atelier-logo.png" alt="Atelier" width="80" />
-</p>
-
-<p align="center">
   <strong>Your digital storefront. One link. Instant NIM.</strong>
 </p>
 
