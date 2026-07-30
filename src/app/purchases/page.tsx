@@ -6,6 +6,7 @@ import DashboardLayout from '@/components/DashboardLayout';
 import { Download, ArrowLeft, ShoppingBag } from 'lucide-react';
 import { useWallet } from '@/context/WalletContext';
 import { Purchase } from '@/lib/db';
+import { getNetworkLabel } from '@/lib/explorer';
 
 export default function BuyerPurchasesPage() {
   const { walletAddress } = useWallet();
@@ -36,14 +37,18 @@ export default function BuyerPurchasesPage() {
 
   const handleDownloadReceipt = (item: Purchase) => {
     const amountStr = item.amountNim ? `${item.amountNim.toLocaleString()} NIM` : `$${item.amountUsdt} USDT`;
+    const network = getNetworkLabel();
     const receiptText = `ATELIER PURCHASE RECEIPT
+========================
 Product: ${item.productTitle}
 Creator: ${item.handle}
 Amount: ${amountStr}
 Transaction: ${item.txHash}
+Network: ${network}
 Date: ${item.verifiedAt || new Date().toISOString()}
-Explorer: https://nimiq.watch/#${item.txHash}
-Status: Verified on Nimiq blockchain`;
+Status: Verified
+========================
+Powered by Atelier - atelier-fawn-seven-53.vercel.app`;
 
     const blob = new Blob([receiptText], { type: 'text/plain' });
     const a = document.createElement('a');
@@ -84,7 +89,7 @@ Status: Verified on Nimiq blockchain`;
         ) : purchases.length === 0 ? (
           <div className="card" style={{ padding: '60px 24px', textAlign: 'center', borderRadius: '20px' }}>
             <ShoppingBag size={40} color="var(--text-tertiary)" style={{ marginBottom: '16px' }} />
-            <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>You haven't purchased anything yet</h3>
+            <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>You haven&apos;t purchased anything yet</h3>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
               Browse creator storefronts on the Explore page and collect presets, templates, or guides.
             </p>
@@ -111,10 +116,7 @@ Status: Verified on Nimiq blockchain`;
                 </div>
 
                 <div className="purchases-actions-container" style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                  <a href={`https://raw.githubusercontent.com/nimiq/developer-center/main/README.md`} download target="_blank" rel="noreferrer" className="btn btn-lime" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
-                    <Download size={18} /> Download File
-                  </a>
-                  <button onClick={() => handleDownloadReceipt(item)} className="btn btn-ghost" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
+                  <button onClick={() => handleDownloadReceipt(item)} className="btn btn-lime" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
                     <Download size={18} /> Receipt (.txt)
                   </button>
                 </div>

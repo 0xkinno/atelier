@@ -3,11 +3,12 @@
 import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import SidebarNav from '@/components/SidebarNav';
-import { ArrowLeft, Zap, Download, Check, Clock, Menu } from 'lucide-react';
+import { ArrowLeft, Zap, Download, Check, Clock, Menu, ExternalLink } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sendNimPayment, isNimiqPayAvailable, listAccounts } from '@/lib/nimiq';
 import { useWallet } from '@/context/WalletContext';
 import { Product, Profile } from '@/lib/db';
+import { getExplorerLink, getNetworkLabel } from '@/lib/explorer';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ handle: string; productId: string }> }) {
   const resolvedParams = use(params);
@@ -148,14 +149,18 @@ export default function ProductDetailPage({ params }: { params: Promise<{ handle
   const handleDownloadReceipt = () => {
     if (!product || !txHash) return;
     const amountStr = selectedChain === 'nim' ? `${nimAmount.toLocaleString()} NIM` : `$${usdtAmount} USDT`;
+    const network = getNetworkLabel();
     const receiptText = `ATELIER PURCHASE RECEIPT
+========================
 Product: ${product.title}
 Creator: ${handle}
 Amount: ${amountStr}
 Transaction: ${txHash}
+Network: ${network}
 Date: ${new Date().toISOString()}
-Explorer: https://nimiq.watch/#${txHash}
-Status: Verified on Nimiq blockchain`;
+Status: Verified
+========================
+Powered by Atelier - atelier-fawn-seven-53.vercel.app`;
 
     const blob = new Blob([receiptText], { type: 'text/plain' });
     const a = document.createElement('a');
@@ -360,6 +365,19 @@ Status: Verified on Nimiq blockchain`;
                         >
                           <Download size={14} /> Download Receipt (.txt)
                         </button>
+                        {(() => {
+                          const link = getExplorerLink(txHash);
+                          if (!link) return (
+                            <div className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', wordBreak: 'break-all', marginTop: '4px' }}>
+                              TxHash: {txHash}
+                            </div>
+                          );
+                          return (
+                            <a href={link.url} target="_blank" rel="noreferrer" style={{ fontSize: '0.75rem', color: 'var(--accent-olive)', textDecoration: 'underline', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px' }} className="font-mono">
+                              {link.label} <ExternalLink size={10} />
+                            </a>
+                          );
+                        })()}
                       </div>
                     )}
                   </div>
