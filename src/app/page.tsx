@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useWallet } from '@/context/WalletContext';
 import {
-  ArrowRight, ShieldCheck, Zap, Check, LayoutDashboard, Menu, X
+  ArrowRight, ShieldCheck, Zap, Check, LayoutDashboard, Menu, X, Power
 } from 'lucide-react';
 
 export default function LandingPage() {
-  const { walletAddress, isConnected, connectWallet, formatAddress } = useWallet();
+  const { walletAddress, isConnected, connectWallet, disconnectWallet, formatAddress } = useWallet();
   const [monthlySales, setMonthlySales] = useState<number>(3000);
   const gumroadLoss = Math.round(monthlySales * 0.10);
   const atelierKeeps = monthlySales;
@@ -54,7 +54,7 @@ export default function LandingPage() {
         transition: 'all 300ms var(--ease-premium)',
       }}>
         <div className="container" style={{ height: '72px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* Brand Logo - Single Line No Wrap */}
+          {/* Brand Logo */}
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', whiteSpace: 'nowrap' }}>
             <div style={{
               width: '32px', height: '32px', backgroundColor: 'var(--bg-dark)', borderRadius: '6px',
@@ -69,7 +69,7 @@ export default function LandingPage() {
             </span>
           </Link>
 
-          {/* Desktop Nav Links (Hidden below 1024px) */}
+          {/* Desktop Nav Links */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }} className="nav-links-desktop">
             <a href="#how-it-works" className="link-animated" style={{ fontSize: '0.82rem', fontWeight: 500, color: 'var(--text-secondary)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
               HOW IT WORKS
@@ -91,16 +91,36 @@ export default function LandingPage() {
           {/* Action Buttons & Mobile Hamburger */}
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
             {isConnected ? (
-              <Link href="/dashboard" className="btn btn-olive btn-sm font-mono" style={{ fontSize: '0.8rem' }}>
-                {formatAddress(walletAddress)}
-              </Link>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Link href="/dashboard" className="btn btn-olive btn-sm font-mono" style={{ fontSize: '0.8rem' }}>
+                  {formatAddress(walletAddress)}
+                </Link>
+                <button
+                  onClick={() => disconnectWallet()}
+                  title="Disconnect Wallet"
+                  style={{
+                    background: 'rgba(239, 68, 68, 0.15)',
+                    border: '1px solid rgba(239, 68, 68, 0.4)',
+                    color: '#EF4444',
+                    borderRadius: '8px',
+                    padding: '6px 8px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    minHeight: '36px'
+                  }}
+                >
+                  <Power size={14} />
+                </button>
+              </div>
             ) : (
               <button onClick={() => connectWallet()} className="btn btn-olive btn-sm">
                 Connect Nimiq
               </button>
             )}
 
-            {/* Mobile Hamburger Trigger Button (Visible below 1024px) */}
+            {/* Mobile Hamburger Trigger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="nav-hamburger-btn"
@@ -136,6 +156,27 @@ export default function LandingPage() {
             <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--accent-olive)', fontWeight: 700, fontSize: '1rem', padding: '8px 0' }}>
               OPEN DASHBOARD 📊
             </Link>
+
+            <div style={{ height: '1px', backgroundColor: 'var(--border-light)', margin: '4px 0' }} />
+
+            {isConnected ? (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0' }}>
+                <span className="font-mono" style={{ fontSize: '0.88rem', color: 'var(--accent-olive)' }}>
+                  {formatAddress(walletAddress)}
+                </span>
+                <button
+                  onClick={() => { disconnectWallet(); setMobileMenuOpen(false); }}
+                  className="btn btn-ghost btn-sm"
+                  style={{ color: '#EF4444', borderColor: '#EF4444' }}
+                >
+                  <Power size={14} /> Disconnect
+                </button>
+              </div>
+            ) : (
+              <button onClick={() => { connectWallet(); setMobileMenuOpen(false); }} className="btn btn-olive btn-sm" style={{ width: '100%', minHeight: '44px', justifyContent: 'center' }}>
+                Connect Nimiq Wallet
+              </button>
+            )}
           </div>
         )}
       </nav>

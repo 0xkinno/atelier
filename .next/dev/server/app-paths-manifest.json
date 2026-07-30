@@ -1,11 +1,9 @@
 {
-  "/[handle]/[productId]/page": "app/[handle]/[productId]/page.js",
   "/[handle]/page": "app/[handle]/page.js",
   "/api/explore/route": "app/api/explore/route.js",
-  "/api/products/[id]/route": "app/api/products/[id]/route.js",
   "/api/products/route": "app/api/products/route.js",
   "/api/profile/[handle]/route": "app/api/profile/[handle]/route.js",
-  "/api/quote/nim/route": "app/api/quote/nim/route.js",
+  "/api/profile/wallet/[addr]/route": "app/api/profile/wallet/[addr]/route.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/explore/page": "app/explore/page.js",
   "/page": "app/page.js",

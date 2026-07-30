@@ -2,15 +2,14 @@
 
 import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
-import SidebarNav from '@/components/SidebarNav';
-import { ArrowLeft, ArrowRight, Package, Menu } from 'lucide-react';
+import DashboardLayout from '@/components/DashboardLayout';
+import { ArrowLeft, ArrowRight, Package } from 'lucide-react';
 import { Profile, Product } from '@/lib/db';
 
 export default function PublicStorefrontPage({ params }: { params: Promise<{ handle: string }> }) {
   const resolvedParams = use(params);
   const handle = resolvedParams.handle;
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,9 +42,11 @@ export default function PublicStorefrontPage({ params }: { params: Promise<{ han
 
   if (isLoading) {
     return (
-      <div className="ambient-bg-wash" style={{ minHeight: '100vh', padding: '100px 0', textAlign: 'center' }}>
-        Loading storefront...
-      </div>
+      <DashboardLayout title="Storefront" handle={handle}>
+        <div style={{ padding: '100px 0', textAlign: 'center', color: 'var(--text-tertiary)' }}>
+          Loading storefront...
+        </div>
+      </DashboardLayout>
     );
   }
 
@@ -59,37 +60,15 @@ export default function PublicStorefrontPage({ params }: { params: Promise<{ han
   };
 
   return (
-    <div className="ambient-bg-wash" style={{ minHeight: '100vh', paddingBottom: '120px' }}>
-      {/* Dashboard Offcanvas Sidebar for Mobile Continuous Shell */}
-      <SidebarNav handle={handle} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      {/* Dashboard Mobile Top Navigation Shell (☰ Menu Storefront) */}
-      <div className="dashboard-mobile-header" style={{
-        display: 'none', alignItems: 'center', justifyContent: 'space-between',
-        padding: '14px 20px', borderBottom: '1px solid var(--border-light)',
-        backgroundColor: 'rgba(247, 246, 242, 0.95)', backdropFilter: 'blur(12px)',
-        position: 'sticky', top: 0, zIndex: 100, width: '100%'
-      }}>
-        <button
-          onClick={() => setSidebarOpen(true)}
-          style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: '6px',
-            display: 'flex', alignItems: 'center', gap: '8px', minHeight: '44px'
-          }}
-        >
-          <Menu size={24} color="var(--text-primary)" />
-          <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Menu</span>
-        </button>
-        <span className="font-display" style={{ fontWeight: 700, fontSize: '1.15rem' }}>Storefront</span>
-        <div style={{ width: '40px' }} />
-      </div>
-
+    <DashboardLayout title="Storefront" handle={handle}>
       {/* Decorative Top Banner */}
       <div style={{
-        height: '160px',
+        height: '140px',
         position: 'relative',
         overflow: 'hidden',
+        borderRadius: '16px',
         backgroundColor: activeProfile.accentColor || '#D4E157',
+        marginBottom: '20px'
       }}>
         <div style={{
           position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
@@ -103,32 +82,33 @@ export default function PublicStorefrontPage({ params }: { params: Promise<{ han
           pointerEvents: 'none',
         }} />
 
-        <div className="container" style={{ position: 'relative', zIndex: 10, paddingTop: '20px' }}>
-          <Link href="/dashboard" style={{ textDecoration: 'none', color: '#1A1C16', display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', fontWeight: 600, padding: '6px 12px', backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: '100px' }}>
+        <div style={{ position: 'relative', zIndex: 10, padding: '16px 20px' }}>
+          <Link href="/dashboard" style={{ textDecoration: 'none', color: '#1A1C16', display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: 600, padding: '6px 12px', backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: '100px' }}>
             <ArrowLeft size={16} /> Back to Dashboard
           </Link>
         </div>
       </div>
 
       {/* Creator Profile Header */}
-      <div className="container" style={{ marginTop: '-40px', marginBottom: '36px', position: 'relative', zIndex: 20 }}>
+      <div style={{ marginBottom: '32px', position: 'relative', zIndex: 20 }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '20px', flexWrap: 'wrap' }}>
           <img
             src={activeProfile.avatarUrl}
             alt={activeProfile.displayName}
             style={{
-              width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover',
-              border: '4px solid #FFFFFF', boxShadow: 'var(--shadow-lg)', backgroundColor: '#FFFFFF'
+              width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover',
+              border: '4px solid #FFFFFF', boxShadow: 'var(--shadow-lg)', backgroundColor: '#FFFFFF',
+              marginTop: '-30px'
             }}
           />
           <div style={{ flex: 1, minWidth: '240px' }}>
-            <h1 className="font-display" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', marginBottom: '4px', color: 'var(--text-primary)' }}>
+            <h1 className="font-display" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', marginBottom: '4px', color: 'var(--text-primary)' }}>
               {activeProfile.displayName}
             </h1>
-            <div className="font-mono" style={{ fontSize: '0.88rem', color: 'var(--text-tertiary)', marginBottom: '10px' }}>
+            <div className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--text-tertiary)', marginBottom: '8px' }}>
               @{activeProfile.handle} • {products.length} PRODUCTS
             </div>
-            <p style={{ maxWidth: '600px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+            <p style={{ maxWidth: '600px', color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.6 }}>
               {activeProfile.bio}
             </p>
           </div>
@@ -136,22 +116,20 @@ export default function PublicStorefrontPage({ params }: { params: Promise<{ han
       </div>
 
       {/* Storefront Products Feed Section */}
-      <div className="container">
-        <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', marginBottom: '24px' }}>Digital Goods & Downloads</h2>
+      <div>
+        <h2 style={{ fontSize: 'clamp(1.3rem, 4vw, 1.6rem)', marginBottom: '20px' }}>Digital Goods & Downloads</h2>
 
         {products.length === 0 ? (
-          <div className="card" style={{ padding: '60px 20px', textAlign: 'center' }}>
+          <div className="card" style={{ padding: '60px 20px', textAlign: 'center', borderRadius: '20px' }}>
             <Package size={40} color="var(--text-tertiary)" style={{ marginBottom: '12px' }} />
             <h3>No digital products available yet</h3>
             <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Check back soon for new releases from @{handle}.</p>
           </div>
         ) : (
-          /* Mobile Single-Column Product Feed */
-          <div className="storefront-feed-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '32px' }}>
+          <div className="storefront-feed-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
             {products.map((p) => (
               <div key={p.id} className="card glow-hover" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: '20px' }}>
                 <div>
-                  {/* Aspect-preserved Image Container */}
                   <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', backgroundColor: 'var(--bg-secondary)', overflow: 'hidden' }}>
                     <img src={p.previewImageUrl} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     <div style={{
@@ -163,27 +141,27 @@ export default function PublicStorefrontPage({ params }: { params: Promise<{ han
                     </div>
                   </div>
 
-                  <div style={{ padding: '24px' }}>
-                    <span className="eyebrow" style={{ color: 'var(--accent-moss)', marginBottom: '8px', display: 'block', fontSize: '0.72rem' }}>
+                  <div style={{ padding: '20px' }}>
+                    <span className="eyebrow" style={{ color: 'var(--accent-moss)', marginBottom: '6px', display: 'block', fontSize: '0.72rem' }}>
                       {p.category}
                     </span>
-                    <h3 style={{ fontSize: '1.25rem', marginBottom: '10px', lineHeight: 1.35 }}>
+                    <h3 style={{ fontSize: '1.15rem', marginBottom: '8px', lineHeight: 1.35 }}>
                       {p.title}
                     </h3>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '20px' }}>
+                    <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '16px' }}>
                       {p.description}
                     </p>
                   </div>
                 </div>
 
-                <div style={{ padding: '0 24px 24px 24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <div style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)' }} className="font-mono">
+                <div style={{ padding: '0 20px 20px 20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)' }} className="font-mono">
                     Deliverable Size: {p.fileSize || '4.8 MB'}
                   </div>
                   <Link
                     href={`/${handle}/${p.id}`}
                     className="btn btn-lime"
-                    style={{ width: '100%', minHeight: '56px', fontSize: '1rem', justifyContent: 'center' }}
+                    style={{ width: '100%', minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}
                   >
                     View & Buy <ArrowRight size={18} />
                   </Link>
@@ -198,13 +176,10 @@ export default function PublicStorefrontPage({ params }: { params: Promise<{ han
         @media (max-width: 768px) {
           .storefront-feed-grid {
             grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-          .dashboard-mobile-header {
-            display: flex !important;
+            gap: 20px !important;
           }
         }
       `}</style>
-    </div>
+    </DashboardLayout>
   );
 }

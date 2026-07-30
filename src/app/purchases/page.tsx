@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import SidebarNav from '@/components/SidebarNav';
-import { Download, ExternalLink, ArrowLeft, ShoppingBag, Menu } from 'lucide-react';
+import DashboardLayout from '@/components/DashboardLayout';
+import { Download, ExternalLink, ArrowLeft, ShoppingBag } from 'lucide-react';
 import { useWallet } from '@/context/WalletContext';
 import { Purchase } from '@/lib/db';
 
 export default function BuyerPurchasesPage() {
   const { walletAddress } = useWallet();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,33 +35,9 @@ export default function BuyerPurchasesPage() {
   }, [walletAddress]);
 
   return (
-    <div className="ambient-bg-wash" style={{ minHeight: '100vh', paddingBottom: '100px' }}>
-      {/* Dashboard Offcanvas Sidebar Drawer */}
-      <SidebarNav handle="mayastudio" isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      {/* Dashboard Mobile Top Navigation Shell (☰ Menu Library) */}
-      <div className="dashboard-mobile-header" style={{
-        display: 'none', alignItems: 'center', justifyContent: 'space-between',
-        padding: '14px 20px', borderBottom: '1px solid var(--border-light)',
-        backgroundColor: 'rgba(247, 246, 242, 0.95)', backdropFilter: 'blur(12px)',
-        position: 'sticky', top: 0, zIndex: 100, width: '100%'
-      }}>
-        <button
-          onClick={() => setSidebarOpen(true)}
-          style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: '6px',
-            display: 'flex', alignItems: 'center', gap: '8px', minHeight: '44px'
-          }}
-        >
-          <Menu size={24} color="var(--text-primary)" />
-          <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Menu</span>
-        </button>
-        <span className="font-display" style={{ fontWeight: 700, fontSize: '1.15rem' }}>Library</span>
-        <div style={{ width: '40px' }} />
-      </div>
-
-      <div className="container" style={{ maxWidth: '800px', paddingTop: '24px' }}>
-        <Link href="/dashboard" style={{ textDecoration: 'none', color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', marginBottom: '24px' }} className="purchases-desktop-back">
+    <DashboardLayout title="Library" handle="mayastudio">
+      <div style={{ maxWidth: '800px' }}>
+        <Link href="/dashboard" style={{ textDecoration: 'none', color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', marginBottom: '20px' }}>
           <ArrowLeft size={16} /> Back to Dashboard
         </Link>
 
@@ -74,12 +49,12 @@ export default function BuyerPurchasesPage() {
           <img src="/images/purchases_header_desk.jpg" alt="Purchases Library Header" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
-        <div style={{ marginBottom: '32px' }}>
+        <div style={{ marginBottom: '28px' }}>
           <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '8px' }}>
             <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>MY DIGITAL LIBRARY</span>
           </div>
           <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.4rem)', marginBottom: '8px' }}>Purchased Digital Goods</h1>
-          <p style={{ color: 'var(--text-secondary)' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
             All your on-chain verified downloads and signed receipts.
           </p>
         </div>
@@ -117,12 +92,11 @@ export default function BuyerPurchasesPage() {
                   </div>
                 </div>
 
-                {/* Stacked Vertical Action Buttons on Mobile */}
                 <div className="purchases-actions-container" style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                  <a href={`https://raw.githubusercontent.com/nimiq/developer-center/main/README.md`} download target="_blank" rel="noreferrer" className="btn btn-lime" style={{ flex: 1, minHeight: '56px', fontSize: '0.95rem', justifyContent: 'center' }}>
+                  <a href={`https://raw.githubusercontent.com/nimiq/developer-center/main/README.md`} download target="_blank" rel="noreferrer" className="btn btn-lime" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
                     <Download size={18} /> Download File
                   </a>
-                  <a href={`https://nimiq.watch/#${item.txHash}`} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ flex: 1, minHeight: '56px', fontSize: '0.95rem', justifyContent: 'center' }}>
+                  <a href={`https://nimiq.watch/#${item.txHash}`} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
                     <ExternalLink size={18} /> Receipt
                   </a>
                 </div>
@@ -141,14 +115,8 @@ export default function BuyerPurchasesPage() {
           .purchases-actions-container .btn {
             width: 100% !important;
           }
-          .dashboard-mobile-header {
-            display: flex !important;
-          }
-          .purchases-desktop-back {
-            display: none !important;
-          }
         }
       `}</style>
-    </div>
+    </DashboardLayout>
   );
 }

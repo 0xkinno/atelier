@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { X } from 'lucide-react';
+import { X, Power } from 'lucide-react';
+import { useWallet } from '@/context/WalletContext';
 
 interface SidebarNavProps {
   handle?: string;
@@ -12,6 +13,9 @@ interface SidebarNavProps {
 
 export default function SidebarNav({ handle = 'mayastudio', isOpen = false, onClose }: SidebarNavProps) {
   const pathname = usePathname();
+  const { walletAddress, isConnected, disconnectWallet, formatAddress } = useWallet();
+
+  const activeHandle = handle || 'mayastudio';
 
   const navItems = [
     { label: 'Overview', href: '/dashboard', emoji: '📊' },
@@ -22,7 +26,7 @@ export default function SidebarNav({ handle = 'mayastudio', isOpen = false, onCl
   ];
 
   const secondaryItems = [
-    { label: 'My Storefront', href: `/${handle}`, emoji: '🏪', external: true },
+    { label: 'My Storefront', href: `/${activeHandle}`, emoji: '🏪' },
     { label: 'Explore', href: '/explore', emoji: '🧭' },
   ];
 
@@ -135,12 +139,12 @@ export default function SidebarNav({ handle = 'mayastudio', isOpen = false, onCl
           {/* Secondary Menu */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {secondaryItems.map((item) => {
+              const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={onClose}
-                  target={item.external ? '_blank' : undefined}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -148,14 +152,16 @@ export default function SidebarNav({ handle = 'mayastudio', isOpen = false, onCl
                     padding: '12px 14px',
                     borderRadius: '8px',
                     textDecoration: 'none',
-                    color: '#FFFFFF',
-                    fontWeight: 600,
+                    color: isActive ? '#D4E157' : '#FFFFFF',
+                    backgroundColor: isActive ? 'rgba(212, 225, 87, 0.22)' : 'transparent',
+                    borderLeft: isActive ? '3px solid #D4E157' : '3px solid transparent',
+                    fontWeight: isActive ? 700 : 600,
                     fontSize: '0.9rem',
                     minHeight: '44px',
                   }}
                 >
                   <span style={{ fontSize: '20px', lineHeight: 1 }}>{item.emoji}</span>
-                  <span style={{ color: '#FFFFFF' }}>{item.label}</span>
+                  <span style={{ color: isActive ? '#D4E157' : '#FFFFFF' }}>{item.label}</span>
                 </Link>
               );
             })}
@@ -164,8 +170,55 @@ export default function SidebarNav({ handle = 'mayastudio', isOpen = false, onCl
 
         <div>
           <div style={{ height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.12)', margin: '16px 0' }} />
+          
+          {/* Connected Wallet Disconnect Status & Power Button */}
+          {(isConnected || walletAddress) && (
+            <div style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              padding: '10px 12px',
+              borderRadius: '8px',
+              marginBottom: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '8px',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#D4E157', flexShrink: 0 }} />
+                <span className="font-mono" style={{ fontSize: '0.75rem', color: '#D4E157', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {formatAddress(walletAddress)}
+                </span>
+              </div>
+              <button
+                onClick={() => {
+                  disconnectWallet();
+                  if (onClose) onClose();
+                }}
+                title="Disconnect Wallet"
+                style={{
+                  background: 'rgba(239, 68, 68, 0.2)',
+                  border: '1px solid rgba(239, 68, 68, 0.4)',
+                  color: '#EF4444',
+                  borderRadius: '6px',
+                  padding: '4px 6px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
+                  flexShrink: 0
+                }}
+              >
+                <Power size={13} />
+              </button>
+            </div>
+          )}
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {bottomItems.map((item) => {
+              const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
@@ -178,14 +231,16 @@ export default function SidebarNav({ handle = 'mayastudio', isOpen = false, onCl
                     padding: '12px 14px',
                     borderRadius: '8px',
                     textDecoration: 'none',
-                    color: '#FFFFFF',
-                    fontWeight: 600,
+                    color: isActive ? '#D4E157' : '#FFFFFF',
+                    backgroundColor: isActive ? 'rgba(212, 225, 87, 0.22)' : 'transparent',
+                    borderLeft: isActive ? '3px solid #D4E157' : '3px solid transparent',
+                    fontWeight: isActive ? 700 : 600,
                     fontSize: '0.9rem',
                     minHeight: '44px',
                   }}
                 >
                   <span style={{ fontSize: '20px', lineHeight: 1 }}>{item.emoji}</span>
-                  <span style={{ color: '#FFFFFF' }}>{item.label}</span>
+                  <span style={{ color: isActive ? '#D4E157' : '#FFFFFF' }}>{item.label}</span>
                 </Link>
               );
             })}
