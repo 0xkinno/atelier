@@ -15,6 +15,10 @@
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square&labelColor=1A1C16" alt="License" />
 </p>
 
+<p align="center">
+  <img src="docs/screenshots/atelier-banner.png" alt="Atelier Banner" width="100%" />
+</p>
+
 > **Atelier is a zero-commission creator storefront that lives inside Nimiq Pay.**
 > Photographers sell presets. Designers sell templates. Musicians sell sample packs. Developers sell boilerplates. Every payment settles in under three seconds, verified on-chain, with the creator keeping 100% of the revenue. No accounts. No middlemen. No platform fees.
 
@@ -24,13 +28,11 @@
 
 ## Product Screenshots
 
-| Landing page | Creator storefront |
-|---|---|
-| ![Landing](docs/screenshots/landing.png) | ![Storefront](docs/screenshots/storefront.png) |
-
-| Creator dashboard | Product checkout |
-|---|---|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Checkout](docs/screenshots/checkout.png) |
+| Landing Page | Creator Storefront |
+|:---:|:---:|
+| <img src="docs/screenshots/landing.png" alt="Landing Page" width="100%" /> | <img src="docs/screenshots/storefront.png" alt="Creator Storefront" width="100%" /> |
+| **Creator Dashboard** | **Product Checkout** |
+| <img src="docs/screenshots/dashboard.png" alt="Creator Dashboard" width="100%" /> | <img src="docs/screenshots/checkout.png" alt="Product Checkout" width="100%" /> |
 
 ---
 
@@ -38,7 +40,7 @@
 
 | Resource | Link |
 |---|---|
-| **Live App** | [atelier-app.vercel.app](https://atelier-app.vercel.app) |
+| **Live App** | [atelier-fawn-seven-53.vercel.app](https://atelier-fawn-seven-53.vercel.app) |
 | **GitHub** | [github.com/0xkinno/atelier](https://github.com/0xkinno/atelier) |
 | **Demo Video** | [Watch on YouTube](#) |
 | **Competition** | Nimiq Mini Apps Competition, Cycle I |
