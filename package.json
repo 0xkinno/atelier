@@ -6,7 +6,9 @@
     "dev": "next dev --turbo -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "render:video": "npx remotion render remotion/index.ts AtelierLaunchFilm out/atelier_launch_film.mp4 --codec=h264",
+    "render:fast": "npx remotion render remotion/index.ts AtelierLaunchFilm out/atelier_launch_film.mp4 --codec=h264 --concurrency=4"
   },
   "dependencies": {
     "@nimiq/mini-app-sdk": "latest",
@@ -22,11 +24,13 @@
     "viem": "^2.22.8"
   },
   "devDependencies": {
+    "@remotion/cli": "^4.0.260",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20.17.14",
     "@types/qrcode": "^1.5.5",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "remotion": "^4.0.260",
     "typescript": "^5.7.3"
   }
 }

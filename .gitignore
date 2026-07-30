@@ -4,3 +4,8 @@ node_modules
 .env.local
 .env.production
 *.log
+remotion/
+out/
+*.mp4
+*.webm
+.remotion/

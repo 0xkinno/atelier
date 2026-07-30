@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useWallet } from '@/context/WalletContext';
 import {
   ArrowRight, ShieldCheck, Zap, Check, LayoutDashboard, Menu, X
 } from 'lucide-react';
 
 export default function LandingPage() {
+  const { walletAddress, isConnected, connectWallet, formatAddress } = useWallet();
   const [monthlySales, setMonthlySales] = useState<number>(3000);
   const gumroadLoss = Math.round(monthlySales * 0.10);
   const atelierKeeps = monthlySales;
@@ -88,9 +90,15 @@ export default function LandingPage() {
 
           {/* Action Buttons & Mobile Hamburger */}
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <Link href="/create" className="btn btn-olive btn-sm">
-              Connect Nimiq
-            </Link>
+            {isConnected ? (
+              <Link href="/dashboard" className="btn btn-olive btn-sm font-mono" style={{ fontSize: '0.8rem' }}>
+                {formatAddress(walletAddress)}
+              </Link>
+            ) : (
+              <button onClick={() => connectWallet()} className="btn btn-olive btn-sm">
+                Connect Nimiq
+              </button>
+            )}
 
             {/* Mobile Hamburger Trigger Button (Visible below 1024px) */}
             <button

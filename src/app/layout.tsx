@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -39,7 +40,9 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

@@ -1,13 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Wallet, Check, Sparkles } from 'lucide-react';
-import { listAccounts } from '@/lib/nimiq';
+import { listAccounts, isNimiqPayAvailable } from '@/lib/nimiq';
+import { useWallet } from '@/context/WalletContext';
 
 export default function CreateStorefrontPage() {
   const router = useRouter();
+  const { walletAddress: ctxWallet, connectWallet: ctxConnect } = useWallet();
   const [handle, setHandle] = useState<string>('');
   const [displayName, setDisplayName] = useState<string>('');
   const [bio, setBio] = useState<string>('');
@@ -17,15 +19,31 @@ export default function CreateStorefrontPage() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
+  useEffect(() => {
+    if (ctxWallet) {
+      setWalletAddress(ctxWallet);
+      if (!displayName) {
+        setDisplayName(ctxWallet.substring(0, 10) + '...');
+      }
+    }
+  }, [ctxWallet]);
+
   const handleConnectWallet = async () => {
     setIsConnecting(true);
     setError('');
     try {
-      const accounts = await listAccounts();
-      const addr = accounts && accounts.length > 0 ? accounts[0] : 'NQ07 4444 8888 1111 2222';
-      setWalletAddress(addr);
-      if (!displayName) {
-        setDisplayName(addr.substring(0, 10) + '...');
+      await ctxConnect();
+      const hasPay = await isNimiqPayAvailable();
+      if (hasPay) {
+        const accounts = await listAccounts();
+        if (accounts && accounts.length > 0) {
+          setWalletAddress(accounts[0]);
+          if (!displayName) setDisplayName(accounts[0].substring(0, 10) + '...');
+        }
+      } else {
+        const addr = ctxWallet || 'NQ40 7PTF 8888 1111 2222 3333 4444 5555 9QRN';
+        setWalletAddress(addr);
+        if (!displayName) setDisplayName(addr.substring(0, 10) + '...');
       }
     } catch (err: any) {
       setError(err.message || 'Failed to connect wallet');
@@ -36,7 +54,8 @@ export default function CreateStorefrontPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!handle || !displayName || !walletAddress) {
+    const cleanHandle = handle.toLowerCase().trim();
+    if (!cleanHandle || !displayName || !walletAddress) {
       setError('Please fill in all required fields and connect your Nimiq wallet.');
       return;
     }
@@ -49,7 +68,7 @@ export default function CreateStorefrontPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          handle: handle.toLowerCase().trim(),
+          handle: cleanHandle,
           displayName: displayName.trim(),
           bio: bio.trim(),
           accentColor,
@@ -61,6 +80,9 @@ export default function CreateStorefrontPage() {
       if (!res.ok) {
         throw new Error(data.error || 'Failed to create storefront');
       }
+
+      localStorage.setItem('atelier_handle', cleanHandle);
+      localStorage.setItem('atelier_wallet', walletAddress);
 
       router.push('/dashboard');
     } catch (err: any) {

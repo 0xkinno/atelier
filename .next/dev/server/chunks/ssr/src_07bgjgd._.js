@@ -451,52 +451,79 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SidebarNav$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/SidebarNav.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$WalletContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/context/WalletContext.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$download$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Download$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/download.js [app-ssr] (ecmascript) <export default as Download>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trending$2d$up$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__TrendingUp$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/trending-up.js [app-ssr] (ecmascript) <export default as TrendingUp>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$dollar$2d$sign$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__DollarSign$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/dollar-sign.js [app-ssr] (ecmascript) <export default as DollarSign>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Menu$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/menu.js [app-ssr] (ecmascript) <export default as Menu>");
 'use client';
 ;
 ;
 ;
 ;
+;
 function SalesPage() {
+    const { handle: contextHandle } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$WalletContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useWallet"])();
+    const handle = contextHandle || 'mayastudio';
+    const [sidebarOpen, setSidebarOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [sales, setSales] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
     const [periodFilter, setPeriodFilter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('all');
-    const [sales] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([
+    const demoSales = [
         {
-            id: '1',
-            product: 'Minimalist Motion UI Kit 2026',
-            buyer: 'NQ82 1192 4812 0019 9921',
-            amountNim: '16,111 NIM',
-            amountUsd: '$29.00',
-            chain: 'NIMIQ',
-            date: '2026-07-28 18:42',
-            tx: '0x8f93...4a21'
+            txHash: '0x8f93...4a21',
+            buyerAddress: 'NQ82 1192 4812 0019 9921',
+            handle: 'mayastudio',
+            productId: 'maya-preset-01',
+            productTitle: 'Minimalist Motion UI Kit 2026',
+            amountNim: 16111,
+            amountUsdt: 0,
+            priceFiat: 29,
+            currency: 'NIM',
+            chain: 'Nimiq',
+            verifiedAt: '2026-07-28T18:42:00Z'
         },
         {
-            id: '2',
-            product: 'Editorial Typography Masterclass',
-            buyer: '0x3f1c998240a1b2c8',
-            amountNim: '-',
-            amountUsd: '$49.00 USDT',
-            chain: 'POLYGON',
-            date: '2026-07-28 15:10',
-            tx: '0x12a4...8811'
-        },
-        {
-            id: '3',
-            product: 'Lightroom Color Presets - Autumn',
-            buyer: 'NQ14 0092 1142 8810 3381',
-            amountNim: '11,111 NIM',
-            amountUsd: '$19.00',
-            chain: 'NIMIQ',
-            date: '2026-07-27 11:05',
-            tx: '0x77c2...9010'
+            txHash: '0x12a4...8811',
+            buyerAddress: '0x3f1c998240a1b2c8',
+            handle: 'mayastudio',
+            productId: 'maya-preset-02',
+            productTitle: 'Editorial Typography Masterclass',
+            amountNim: 0,
+            amountUsdt: 49,
+            priceFiat: 49,
+            currency: 'USDT',
+            chain: 'Polygon',
+            verifiedAt: '2026-07-28T15:10:00Z'
         }
+    ];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        async function fetchSalesHistory() {
+            setIsLoading(true);
+            try {
+                const res = await fetch(`/api/purchases/me?handle=${encodeURIComponent(handle)}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setSales(data.purchases || []);
+                }
+            } catch (err) {
+                console.error('Failed to fetch creator sales history:', err);
+            } finally{
+                setIsLoading(false);
+            }
+        }
+        fetchSalesHistory();
+    }, [
+        handle
     ]);
+    const displaySales = sales.length > 0 ? sales : demoSales;
+    const isDemo = sales.length === 0;
+    const totalNim = displaySales.reduce((acc, s)=>acc + (s.amountNim || 0), 0);
+    const totalUsdt = displaySales.reduce((acc, s)=>acc + (s.amountUsdt || 0), 0);
     const exportCSV = ()=>{
         const csvContent = "data:text/csv;charset=utf-8," + [
             "Product,Buyer,Amount,Chain,Date,TxHash"
-        ].concat(sales.map((s)=>`"${s.product}","${s.buyer}","${s.amountUsd}","${s.chain}","${s.date}","${s.tx}"`)).join("\n");
+        ].concat(displaySales.map((s)=>`"${s.productTitle}","${s.buyerAddress}","${s.amountNim ? `${s.amountNim} NIM` : `$${s.amountUsdt} USDT`}","${s.chain}","${new Date(s.verifiedAt).toLocaleDateString()}","${s.txHash}"`)).join("\n");
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
@@ -513,30 +540,100 @@ function SalesPage() {
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SidebarNav$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                handle: "mayastudio"
+                handle: handle,
+                isOpen: sidebarOpen,
+                onClose: ()=>setSidebarOpen(false)
             }, void 0, false, {
                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                lineNumber: 32,
+                lineNumber: 63,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 style: {
                     flex: 1,
-                    padding: '40px 48px',
+                    padding: '24px 32px 120px 32px',
                     overflowY: 'auto'
                 },
+                className: "dashboard-content-main",
                 children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            display: 'none',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            marginBottom: '20px',
+                            paddingBottom: '12px',
+                            borderBottom: '1px solid var(--border-light)'
+                        },
+                        className: "dashboard-mobile-header",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: ()=>setSidebarOpen(true),
+                                style: {
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    padding: '6px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Menu$3e$__["Menu"], {
+                                        size: 24,
+                                        color: "var(--text-primary)"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                        lineNumber: 69,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            fontWeight: 600,
+                                            fontSize: '0.9rem'
+                                        },
+                                        children: "Menu"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                        lineNumber: 70,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                lineNumber: 68,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "font-display",
+                                style: {
+                                    fontWeight: 700,
+                                    fontSize: '1.1rem'
+                                },
+                                children: "Sales History"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                lineNumber: 72,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                        lineNumber: 67,
+                        columnNumber: 9
+                    }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
                             width: '100%',
                             maxHeight: '160px',
-                            height: '160px',
+                            height: '140px',
                             borderRadius: '16px',
                             overflow: 'hidden',
-                            marginBottom: '32px',
+                            marginBottom: '24px',
                             boxShadow: 'var(--shadow-md)',
                             border: '1px solid var(--border-light)'
                         },
+                        className: "img-hover",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                             src: "/images/dashboard_header_desk.jpg",
                             alt: "Sales Analytics Header",
@@ -547,20 +644,18 @@ function SalesPage() {
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                            lineNumber: 40,
+                            lineNumber: 80,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                        lineNumber: 36,
+                        lineNumber: 76,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "layout-stack-header",
                         style: {
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            marginBottom: '32px'
+                            marginBottom: '28px'
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -569,78 +664,78 @@ function SalesPage() {
                                         style: {
                                             display: 'inline-block',
                                             backgroundColor: 'var(--bg-secondary)',
-                                            padding: '6px 14px',
+                                            padding: '4px 12px',
                                             borderRadius: '100px',
-                                            marginBottom: '10px'
+                                            marginBottom: '6px'
                                         },
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             className: "eyebrow",
                                             style: {
-                                                color: 'var(--text-secondary)'
+                                                color: 'var(--text-secondary)',
+                                                fontSize: '0.68rem'
                                             },
                                             children: "ANALYTICS & REVENUE"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                            lineNumber: 46,
+                                            lineNumber: 86,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 45,
+                                        lineNumber: 85,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                         style: {
-                                            fontSize: '2.2rem'
+                                            fontSize: 'clamp(1.5rem, 4vw, 2.2rem)'
                                         },
                                         children: "Sales History"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 48,
+                                        lineNumber: 88,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                lineNumber: 44,
+                                lineNumber: 84,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: exportCSV,
-                                className: "btn btn-ghost",
+                                className: "btn btn-ghost btn-sm",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$download$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Download$3e$__["Download"], {
                                         size: 16
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 52,
+                                        lineNumber: 92,
                                         columnNumber: 13
                                     }, this),
                                     " Export CSV"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                lineNumber: 51,
+                                lineNumber: 91,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                        lineNumber: 43,
+                        lineNumber: 83,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "grid-three-col",
                         style: {
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(3, 1fr)',
                             gap: '20px',
-                            marginBottom: '32px'
+                            marginBottom: '28px'
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "card glow-hover",
                                 style: {
-                                    padding: '24px'
+                                    padding: '20px'
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -653,10 +748,10 @@ function SalesPage() {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "eyebrow",
-                                                children: "TOTAL REVENUE"
+                                                children: "TOTAL SALES"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 60,
+                                                lineNumber: 100,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$dollar$2d$sign$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__DollarSign$3e$__["DollarSign"], {
@@ -664,37 +759,37 @@ function SalesPage() {
                                                 color: "var(--accent-olive)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 61,
+                                                lineNumber: 101,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 59,
+                                        lineNumber: 99,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "font-display",
                                         style: {
-                                            fontSize: '2rem',
+                                            fontSize: '1.8rem',
                                             fontWeight: 600
                                         },
-                                        children: "$1,210.00 USD"
+                                        children: displaySales.length
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 63,
+                                        lineNumber: 103,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                lineNumber: 58,
+                                lineNumber: 98,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "card glow-hover",
                                 style: {
-                                    padding: '24px'
+                                    padding: '20px'
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -710,7 +805,7 @@ function SalesPage() {
                                                 children: "NIM RECEIVED"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 67,
+                                                lineNumber: 109,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trending$2d$up$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__TrendingUp$3e$__["TrendingUp"], {
@@ -718,38 +813,41 @@ function SalesPage() {
                                                 color: "var(--accent-olive)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 68,
+                                                lineNumber: 110,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 66,
+                                        lineNumber: 108,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "font-display",
                                         style: {
-                                            fontSize: '2rem',
+                                            fontSize: '1.8rem',
                                             fontWeight: 600,
                                             color: 'var(--accent-olive)'
                                         },
-                                        children: "18,500 NIM"
-                                    }, void 0, false, {
+                                        children: [
+                                            totalNim.toLocaleString(),
+                                            " NIM"
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 70,
+                                        lineNumber: 112,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                lineNumber: 65,
+                                lineNumber: 107,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "card glow-hover",
                                 style: {
-                                    padding: '24px'
+                                    padding: '20px'
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -765,7 +863,7 @@ function SalesPage() {
                                                 children: "USDT RECEIVED"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 74,
+                                                lineNumber: 118,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$dollar$2d$sign$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__DollarSign$3e$__["DollarSign"], {
@@ -773,37 +871,41 @@ function SalesPage() {
                                                 color: "var(--accent-olive)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 75,
+                                                lineNumber: 119,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 73,
+                                        lineNumber: 117,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "font-display",
                                         style: {
-                                            fontSize: '2rem',
+                                            fontSize: '1.8rem',
                                             fontWeight: 600
                                         },
-                                        children: "120 USDT"
-                                    }, void 0, false, {
+                                        children: [
+                                            "$",
+                                            totalUsdt,
+                                            " USDT"
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 77,
+                                        lineNumber: 121,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                lineNumber: 72,
+                                lineNumber: 116,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                        lineNumber: 57,
+                        lineNumber: 97,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -821,241 +923,235 @@ function SalesPage() {
                                 onClick: ()=>setPeriodFilter(filter),
                                 className: "btn btn-sm",
                                 style: {
-                                    backgroundColor: periodFilter === filter ? 'var(--accent-primary)' : 'var(--bg-card)',
-                                    color: periodFilter === filter ? 'var(--text-on-accent)' : 'var(--text-secondary)',
+                                    backgroundColor: periodFilter === filter ? 'var(--accent-olive)' : 'var(--bg-card)',
+                                    color: periodFilter === filter ? '#FFFFFF' : 'var(--text-secondary)',
                                     border: '1px solid var(--border-medium)',
                                     textTransform: 'uppercase',
                                     fontSize: '0.75rem',
-                                    padding: '6px 16px'
+                                    padding: '6px 14px'
                                 },
                                 children: filter
                             }, filter, false, {
                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                lineNumber: 84,
+                                lineNumber: 130,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                        lineNumber: 82,
+                        lineNumber: 128,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "card",
                         style: {
-                            padding: '32px'
+                            padding: '24px'
                         },
-                        children: sales.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            style: {
-                                textAlign: 'center',
-                                padding: '48px 0'
-                            },
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        children: [
+                            isDemo && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    padding: '12px 16px',
+                                    backgroundColor: 'var(--bg-secondary)',
+                                    borderRadius: '8px',
+                                    fontSize: '0.82rem',
+                                    color: 'var(--text-secondary)',
+                                    marginBottom: '16px'
+                                },
+                                children: "These are sample transactions. Real sales will appear here when buyers purchase your products."
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                lineNumber: 151,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "layout-table-wrapper",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
                                     style: {
-                                        color: 'var(--text-secondary)',
-                                        marginBottom: '16px'
+                                        width: '100%',
+                                        borderCollapse: 'collapse',
+                                        textAlign: 'left',
+                                        fontSize: '0.88rem',
+                                        minWidth: '500px'
                                     },
-                                    children: "No sales recorded yet. Share your storefront link to get started!"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                    lineNumber: 106,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "/dashboard/share",
-                                    className: "btn btn-lime btn-sm",
-                                    children: "Go to Share Kit"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                    lineNumber: 107,
-                                    columnNumber: 15
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                            lineNumber: 105,
-                            columnNumber: 13
-                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
-                            style: {
-                                width: '100%',
-                                borderCollapse: 'collapse',
-                                textAlign: 'left',
-                                fontSize: '0.9rem'
-                            },
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                                        style: {
-                                            borderBottom: '1px solid var(--border-light)'
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                 style: {
-                                                    padding: '12px',
-                                                    color: 'var(--text-tertiary)'
+                                                    borderBottom: '1px solid var(--border-light)'
                                                 },
-                                                className: "font-mono",
-                                                children: "PRODUCT"
-                                            }, void 0, false, {
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                        style: {
+                                                            padding: '10px',
+                                                            color: 'var(--text-tertiary)'
+                                                        },
+                                                        className: "font-mono",
+                                                        children: "PRODUCT"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                        lineNumber: 160,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                        style: {
+                                                            padding: '10px',
+                                                            color: 'var(--text-tertiary)'
+                                                        },
+                                                        className: "font-mono",
+                                                        children: "BUYER ADDRESS"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                        lineNumber: 161,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                        style: {
+                                                            padding: '10px',
+                                                            color: 'var(--text-tertiary)'
+                                                        },
+                                                        className: "font-mono",
+                                                        children: "AMOUNT"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                        lineNumber: 162,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                        style: {
+                                                            padding: '10px',
+                                                            color: 'var(--text-tertiary)'
+                                                        },
+                                                        className: "font-mono",
+                                                        children: "CHAIN"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                        lineNumber: 163,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                        style: {
+                                                            padding: '10px',
+                                                            color: 'var(--text-tertiary)'
+                                                        },
+                                                        className: "font-mono",
+                                                        children: "DATE"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                        lineNumber: 164,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
                                                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 113,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                style: {
-                                                    padding: '12px',
-                                                    color: 'var(--text-tertiary)'
-                                                },
-                                                className: "font-mono",
-                                                children: "BUYER ADDRESS"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 114,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                style: {
-                                                    padding: '12px',
-                                                    color: 'var(--text-tertiary)'
-                                                },
-                                                className: "font-mono",
-                                                children: "AMOUNT"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 115,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                style: {
-                                                    padding: '12px',
-                                                    color: 'var(--text-tertiary)'
-                                                },
-                                                className: "font-mono",
-                                                children: "CHAIN"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 116,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                style: {
-                                                    padding: '12px',
-                                                    color: 'var(--text-tertiary)'
-                                                },
-                                                className: "font-mono",
-                                                children: "DATE"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                lineNumber: 117,
-                                                columnNumber: 19
+                                                lineNumber: 159,
+                                                columnNumber: 17
                                             }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                        lineNumber: 112,
-                                        columnNumber: 17
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                    lineNumber: 111,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
-                                    children: sales.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                                            style: {
-                                                borderBottom: '1px solid var(--border-light)'
-                                            },
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    style: {
-                                                        padding: '16px 12px',
-                                                        fontWeight: 600
-                                                    },
-                                                    children: s.product
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                    lineNumber: 123,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    style: {
-                                                        padding: '16px 12px',
-                                                        color: 'var(--text-secondary)'
-                                                    },
-                                                    className: "font-mono",
-                                                    children: s.buyer
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                    lineNumber: 124,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    style: {
-                                                        padding: '16px 12px',
-                                                        fontWeight: 600,
-                                                        color: 'var(--accent-olive)'
-                                                    },
-                                                    children: s.amountUsd
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                    lineNumber: 125,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    style: {
-                                                        padding: '16px 12px',
-                                                        fontSize: '0.8rem'
-                                                    },
-                                                    className: "font-mono",
-                                                    children: s.chain
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                    lineNumber: 126,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    style: {
-                                                        padding: '16px 12px',
-                                                        color: 'var(--text-tertiary)'
-                                                    },
-                                                    children: s.date
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                                    lineNumber: 127,
-                                                    columnNumber: 21
-                                                }, this)
-                                            ]
-                                        }, s.id, true, {
+                                        }, void 0, false, {
                                             fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                            lineNumber: 122,
-                                            columnNumber: 19
-                                        }, this))
-                                }, void 0, false, {
+                                            lineNumber: 158,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                                            children: displaySales.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                    style: {
+                                                        borderBottom: '1px solid var(--border-light)'
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            style: {
+                                                                padding: '14px 10px',
+                                                                fontWeight: 600
+                                                            },
+                                                            children: s.productTitle
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                            lineNumber: 170,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            style: {
+                                                                padding: '14px 10px',
+                                                                color: 'var(--text-secondary)'
+                                                            },
+                                                            className: "font-mono",
+                                                            children: s.buyerAddress
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                            lineNumber: 171,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            style: {
+                                                                padding: '14px 10px',
+                                                                fontWeight: 600,
+                                                                color: 'var(--accent-olive)'
+                                                            },
+                                                            children: s.amountNim ? `${s.amountNim.toLocaleString()} NIM` : `$${s.amountUsdt} USDT`
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                            lineNumber: 172,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            style: {
+                                                                padding: '14px 10px',
+                                                                fontSize: '0.8rem'
+                                                            },
+                                                            className: "font-mono",
+                                                            children: s.chain
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                            lineNumber: 175,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            style: {
+                                                                padding: '14px 10px',
+                                                                color: 'var(--text-tertiary)'
+                                                            },
+                                                            children: new Date(s.verifiedAt).toLocaleDateString()
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                            lineNumber: 176,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, s.txHash, true, {
+                                                    fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                                    lineNumber: 169,
+                                                    columnNumber: 19
+                                                }, this))
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                            lineNumber: 167,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                                    lineNumber: 120,
-                                    columnNumber: 15
+                                    lineNumber: 157,
+                                    columnNumber: 13
                                 }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                            lineNumber: 110,
-                            columnNumber: 13
-                        }, this)
-                    }, void 0, false, {
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/dashboard/sales/page.tsx",
+                                lineNumber: 156,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                        lineNumber: 103,
+                        lineNumber: 149,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/dashboard/sales/page.tsx",
-                lineNumber: 34,
+                lineNumber: 65,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/dashboard/sales/page.tsx",
-        lineNumber: 31,
+        lineNumber: 62,
         columnNumber: 5
     }, this);
 }

@@ -11,6 +11,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/search.js [app-ssr] (ecmascript) <export default as Search>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/arrow-right.js [app-ssr] (ecmascript) <export default as ArrowRight>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/sparkles.js [app-ssr] (ecmascript) <export default as Sparkles>");
 'use client';
 ;
 ;
@@ -19,7 +20,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 function ExplorePage() {
     const [selectedCategory, setSelectedCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('All');
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
-    const [storefronts] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([
+    const [realProfiles, setRealProfiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
+    const demoStorefronts = [
         {
             handle: 'mayastudio',
             displayName: 'Maya Lin Studio',
@@ -39,38 +42,26 @@ function ExplorePage() {
             productCount: 5,
             salesCount: 88,
             avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
-        },
-        {
-            handle: 'kaitanaka',
-            displayName: 'Kai Tanaka',
-            bio: 'Electronic music producer releasing Ableton templates, synth patches, and sample packs.',
-            category: 'Audio',
-            accentColor: '#6B7F3A',
-            productCount: 4,
-            salesCount: 65,
-            avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80'
-        },
-        {
-            handle: 'sarahjenkins',
-            displayName: 'Sarah Jenkins',
-            bio: 'Full-stack engineer crafting production Next.js boilerplates & API starter kits.',
-            category: 'Code',
-            accentColor: '#3B82F6',
-            productCount: 6,
-            salesCount: 112,
-            avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80'
-        },
-        {
-            handle: 'marcusvance',
-            displayName: 'Marcus Vance',
-            bio: 'Author & educator releasing ebooks, prompt engineering libraries, and writing guides.',
-            category: 'Education',
-            accentColor: '#8B5CF6',
-            productCount: 2,
-            salesCount: 29,
-            avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80'
         }
-    ]);
+    ];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        async function fetchExploreData() {
+            try {
+                const res = await fetch('/api/explore');
+                if (res.ok) {
+                    const data = await res.json();
+                    // Filter out demo handles from real list if present
+                    const realOnly = (data.profiles || []).filter((p)=>p.handle !== 'mayastudio' && p.handle !== 'alexvance');
+                    setRealProfiles(realOnly);
+                }
+            } catch (err) {
+                console.error('Error fetching explore profiles:', err);
+            } finally{
+                setIsLoading(false);
+            }
+        }
+        fetchExploreData();
+    }, []);
     const categories = [
         'All',
         'Design',
@@ -79,7 +70,11 @@ function ExplorePage() {
         'Code',
         'Education'
     ];
-    const filteredStorefronts = storefronts.filter((s)=>{
+    const filteredReal = realProfiles.filter((s)=>{
+        const matchesSearch = s.displayName.toLowerCase().includes(searchQuery.toLowerCase()) || s.handle.toLowerCase().includes(searchQuery.toLowerCase()) || (s.bio || '').toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesSearch;
+    });
+    const filteredDemo = demoStorefronts.filter((s)=>{
         const matchesCategory = selectedCategory === 'All' || s.category === selectedCategory;
         const matchesSearch = s.displayName.toLowerCase().includes(searchQuery.toLowerCase()) || s.handle.toLowerCase().includes(searchQuery.toLowerCase()) || s.bio.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
@@ -93,7 +88,7 @@ function ExplorePage() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
                 style: {
-                    padding: '24px 0',
+                    padding: '20px 0',
                     borderBottom: '1px solid var(--border-light)'
                 },
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -131,7 +126,7 @@ function ExplorePage() {
                                     children: "A"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/explore/page.tsx",
-                                    lineNumber: 80,
+                                    lineNumber: 81,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -143,13 +138,13 @@ function ExplorePage() {
                                     children: "Atelier"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/explore/page.tsx",
-                                    lineNumber: 87,
+                                    lineNumber: 88,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/explore/page.tsx",
-                            lineNumber: 79,
+                            lineNumber: 80,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -158,18 +153,18 @@ function ExplorePage() {
                             children: "Open Storefront"
                         }, void 0, false, {
                             fileName: "[project]/src/app/explore/page.tsx",
-                            lineNumber: 89,
+                            lineNumber: 90,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/explore/page.tsx",
-                    lineNumber: 78,
+                    lineNumber: 79,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/explore/page.tsx",
-                lineNumber: 77,
+                lineNumber: 78,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -181,7 +176,7 @@ function ExplorePage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            height: '240px',
+                            height: '220px',
                             width: '100%',
                             WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
                             maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)'
@@ -196,19 +191,19 @@ function ExplorePage() {
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/app/explore/page.tsx",
-                            lineNumber: 102,
+                            lineNumber: 103,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/explore/page.tsx",
-                        lineNumber: 97,
+                        lineNumber: 98,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "container",
                         style: {
                             position: 'relative',
-                            marginTop: '-120px',
+                            marginTop: '-110px',
                             textAlign: 'center'
                         },
                         children: [
@@ -221,19 +216,19 @@ function ExplorePage() {
                                 children: "DIRECTORY"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/explore/page.tsx",
-                                lineNumber: 106,
+                                lineNumber: 107,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                 className: "font-display",
                                 style: {
-                                    fontSize: '2.8rem',
+                                    fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
                                     marginBottom: '16px'
                                 },
                                 children: "Explore Atelier Storefronts"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/explore/page.tsx",
-                                lineNumber: 107,
+                                lineNumber: 108,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -248,7 +243,7 @@ function ExplorePage() {
                                 children: "Discover digital products, design systems, presets, audio samples, and code from independent creators."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/explore/page.tsx",
-                                lineNumber: 110,
+                                lineNumber: 111,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -268,7 +263,7 @@ function ExplorePage() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/explore/page.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 120,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -287,13 +282,13 @@ function ExplorePage() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/explore/page.tsx",
-                                        lineNumber: 120,
+                                        lineNumber: 121,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/explore/page.tsx",
-                                lineNumber: 118,
+                                lineNumber: 119,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -315,216 +310,482 @@ function ExplorePage() {
                                         children: cat
                                     }, cat, false, {
                                         fileName: "[project]/src/app/explore/page.tsx",
-                                        lineNumber: 136,
+                                        lineNumber: 137,
                                         columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/explore/page.tsx",
-                                lineNumber: 134,
+                                lineNumber: 135,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/explore/page.tsx",
-                        lineNumber: 105,
+                        lineNumber: 106,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/explore/page.tsx",
-                lineNumber: 96,
+                lineNumber: 97,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "container",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    style: {
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(3, 1fr)',
-                        gap: '28px'
-                    },
-                    children: filteredStorefronts.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                            href: `/${s.handle}`,
-                            style: {
-                                textDecoration: 'none',
-                                color: 'inherit'
-                            },
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "card glow-hover",
+                children: [
+                    filteredReal.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            marginBottom: '48px'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    padding: '32px',
-                                    height: '100%',
                                     display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'space-between',
-                                    borderTop: `4px solid ${s.accentColor}`
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                    marginBottom: '20px'
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                style: {
-                                                    display: 'flex',
-                                                    gap: '16px',
-                                                    alignItems: 'center',
-                                                    marginBottom: '20px'
-                                                },
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                        src: s.avatarUrl,
-                                                        alt: s.displayName,
-                                                        style: {
-                                                            width: '56px',
-                                                            height: '56px',
-                                                            borderRadius: '50%',
-                                                            objectFit: 'cover'
-                                                        }
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/explore/page.tsx",
-                                                        lineNumber: 172,
-                                                        columnNumber: 21
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                                style: {
-                                                                    fontSize: '1.2rem',
-                                                                    marginBottom: '2px'
-                                                                },
-                                                                children: s.displayName
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/explore/page.tsx",
-                                                                lineNumber: 174,
-                                                                columnNumber: 23
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "font-mono",
-                                                                style: {
-                                                                    fontSize: '0.78rem',
-                                                                    color: 'var(--text-tertiary)'
-                                                                },
-                                                                children: [
-                                                                    "@",
-                                                                    s.handle
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/app/explore/page.tsx",
-                                                                lineNumber: 175,
-                                                                columnNumber: 23
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/app/explore/page.tsx",
-                                                        lineNumber: 173,
-                                                        columnNumber: 21
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/app/explore/page.tsx",
-                                                lineNumber: 171,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                style: {
-                                                    fontSize: '0.88rem',
-                                                    color: 'var(--text-secondary)',
-                                                    lineHeight: 1.6,
-                                                    marginBottom: '24px'
-                                                },
-                                                children: s.bio
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/explore/page.tsx",
-                                                lineNumber: 179,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__["Sparkles"], {
+                                        size: 20,
+                                        color: "var(--accent-olive)"
+                                    }, void 0, false, {
                                         fileName: "[project]/src/app/explore/page.tsx",
-                                        lineNumber: 170,
-                                        columnNumber: 17
+                                        lineNumber: 161,
+                                        columnNumber: 15
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                         style: {
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                            paddingTop: '16px',
-                                            borderTop: '1px solid var(--border-light)'
+                                            fontSize: '1.4rem'
                                         },
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "font-mono",
-                                                style: {
-                                                    fontSize: '0.78rem',
-                                                    color: 'var(--accent-olive)',
-                                                    fontWeight: 600
-                                                },
-                                                children: [
-                                                    s.productCount,
-                                                    " PRODUCTS • ",
-                                                    s.salesCount,
-                                                    " SALES"
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/app/explore/page.tsx",
-                                                lineNumber: 185,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                style: {
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '4px',
-                                                    fontSize: '0.82rem',
-                                                    fontWeight: 600,
-                                                    color: 'var(--text-primary)'
-                                                },
-                                                children: [
-                                                    "Visit ",
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__["ArrowRight"], {
-                                                        size: 14
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/explore/page.tsx",
-                                                        lineNumber: 189,
-                                                        columnNumber: 27
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/app/explore/page.tsx",
-                                                lineNumber: 188,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                        children: "Live Creator Storefronts"
+                                    }, void 0, false, {
                                         fileName: "[project]/src/app/explore/page.tsx",
-                                        lineNumber: 184,
-                                        columnNumber: 17
+                                        lineNumber: 162,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/explore/page.tsx",
-                                lineNumber: 163,
-                                columnNumber: 15
+                                lineNumber: 160,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "grid-three-col",
+                                style: {
+                                    gap: '28px'
+                                },
+                                children: filteredReal.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                        href: `/${s.handle}`,
+                                        style: {
+                                            textDecoration: 'none',
+                                            color: 'inherit'
+                                        },
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "card glow-hover",
+                                            style: {
+                                                padding: '28px',
+                                                height: '100%',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'space-between',
+                                                borderTop: `4px solid ${s.accentColor || '#D4E157'}`
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                display: 'flex',
+                                                                gap: '16px',
+                                                                alignItems: 'center',
+                                                                marginBottom: '16px'
+                                                            },
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                                    src: s.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+                                                                    alt: s.displayName,
+                                                                    style: {
+                                                                        width: '50px',
+                                                                        height: '50px',
+                                                                        borderRadius: '50%',
+                                                                        objectFit: 'cover'
+                                                                    }
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                                    lineNumber: 170,
+                                                                    columnNumber: 25
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                                            style: {
+                                                                                fontSize: '1.15rem',
+                                                                                marginBottom: '2px'
+                                                                            },
+                                                                            children: s.displayName
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                                            lineNumber: 172,
+                                                                            columnNumber: 27
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "font-mono",
+                                                                            style: {
+                                                                                fontSize: '0.78rem',
+                                                                                color: 'var(--text-tertiary)'
+                                                                            },
+                                                                            children: [
+                                                                                "@",
+                                                                                s.handle
+                                                                            ]
+                                                                        }, void 0, true, {
+                                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                                            lineNumber: 173,
+                                                                            columnNumber: 27
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                                    lineNumber: 171,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 169,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                            style: {
+                                                                fontSize: '0.88rem',
+                                                                color: 'var(--text-secondary)',
+                                                                lineHeight: 1.6,
+                                                                marginBottom: '20px'
+                                                            },
+                                                            children: s.bio || 'Digital goods creator on Nimiq Pay.'
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 176,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                    lineNumber: 168,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                        alignItems: 'center',
+                                                        paddingTop: '16px',
+                                                        borderTop: '1px solid var(--border-light)'
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "font-mono",
+                                                            style: {
+                                                                fontSize: '0.78rem',
+                                                                color: 'var(--accent-olive)',
+                                                                fontWeight: 600
+                                                            },
+                                                            children: [
+                                                                s.productCount || 0,
+                                                                " PRODUCTS • ",
+                                                                s.totalSales || 0,
+                                                                " SALES"
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 182,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            style: {
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '4px',
+                                                                fontSize: '0.82rem',
+                                                                fontWeight: 600
+                                                            },
+                                                            children: [
+                                                                "Visit ",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__["ArrowRight"], {
+                                                                    size: 14
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                                    lineNumber: 186,
+                                                                    columnNumber: 31
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 185,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                    lineNumber: 181,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/explore/page.tsx",
+                                            lineNumber: 167,
+                                            columnNumber: 19
+                                        }, this)
+                                    }, s.handle, false, {
+                                        fileName: "[project]/src/app/explore/page.tsx",
+                                        lineNumber: 166,
+                                        columnNumber: 17
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/explore/page.tsx",
+                                lineNumber: 164,
+                                columnNumber: 13
                             }, this)
-                        }, s.handle, false, {
-                            fileName: "[project]/src/app/explore/page.tsx",
-                            lineNumber: 158,
-                            columnNumber: 13
-                        }, this))
-                }, void 0, false, {
-                    fileName: "[project]/src/app/explore/page.tsx",
-                    lineNumber: 156,
-                    columnNumber: 9
-                }, this)
-            }, void 0, false, {
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/explore/page.tsx",
+                        lineNumber: 159,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '12px',
+                                    margin: '32px 0 20px 0'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "eyebrow",
+                                        style: {
+                                            color: 'var(--text-tertiary)',
+                                            fontSize: '0.75rem',
+                                            whiteSpace: 'nowrap'
+                                        },
+                                        children: "DEMO STOREFRONTS"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/explore/page.tsx",
+                                        lineNumber: 199,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            height: '1px',
+                                            backgroundColor: 'var(--border-medium)',
+                                            flex: 1
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/explore/page.tsx",
+                                        lineNumber: 202,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/explore/page.tsx",
+                                lineNumber: 198,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "grid-three-col",
+                                style: {
+                                    gap: '28px'
+                                },
+                                children: filteredDemo.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                        href: `/${s.handle}`,
+                                        style: {
+                                            textDecoration: 'none',
+                                            color: 'inherit'
+                                        },
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "card glow-hover",
+                                            style: {
+                                                padding: '28px',
+                                                height: '100%',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'space-between',
+                                                borderTop: `4px solid ${s.accentColor}`
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                display: 'flex',
+                                                                gap: '16px',
+                                                                alignItems: 'center',
+                                                                marginBottom: '16px'
+                                                            },
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                                    src: s.avatarUrl,
+                                                                    alt: s.displayName,
+                                                                    style: {
+                                                                        width: '50px',
+                                                                        height: '50px',
+                                                                        borderRadius: '50%',
+                                                                        objectFit: 'cover'
+                                                                    }
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                                    lineNumber: 211,
+                                                                    columnNumber: 23
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                                            style: {
+                                                                                fontSize: '1.15rem',
+                                                                                marginBottom: '2px'
+                                                                            },
+                                                                            children: s.displayName
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                                            lineNumber: 213,
+                                                                            columnNumber: 25
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "font-mono",
+                                                                            style: {
+                                                                                fontSize: '0.78rem',
+                                                                                color: 'var(--text-tertiary)'
+                                                                            },
+                                                                            children: [
+                                                                                "@",
+                                                                                s.handle
+                                                                            ]
+                                                                        }, void 0, true, {
+                                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                                            lineNumber: 214,
+                                                                            columnNumber: 25
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                                    lineNumber: 212,
+                                                                    columnNumber: 23
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 210,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                            style: {
+                                                                fontSize: '0.88rem',
+                                                                color: 'var(--text-secondary)',
+                                                                lineHeight: 1.6,
+                                                                marginBottom: '20px'
+                                                            },
+                                                            children: s.bio
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 217,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                    lineNumber: 209,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                        alignItems: 'center',
+                                                        paddingTop: '16px',
+                                                        borderTop: '1px solid var(--border-light)'
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "font-mono",
+                                                            style: {
+                                                                fontSize: '0.78rem',
+                                                                color: 'var(--accent-olive)',
+                                                                fontWeight: 600
+                                                            },
+                                                            children: [
+                                                                s.productCount,
+                                                                " PRODUCTS • ",
+                                                                s.salesCount,
+                                                                " SALES"
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 223,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            style: {
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '4px',
+                                                                fontSize: '0.82rem',
+                                                                fontWeight: 600
+                                                            },
+                                                            children: [
+                                                                "Visit ",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__["ArrowRight"], {
+                                                                    size: 14
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                                    lineNumber: 227,
+                                                                    columnNumber: 29
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/explore/page.tsx",
+                                                            lineNumber: 226,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/explore/page.tsx",
+                                                    lineNumber: 222,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/explore/page.tsx",
+                                            lineNumber: 208,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, s.handle, false, {
+                                        fileName: "[project]/src/app/explore/page.tsx",
+                                        lineNumber: 207,
+                                        columnNumber: 15
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/explore/page.tsx",
+                                lineNumber: 205,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/explore/page.tsx",
+                        lineNumber: 197,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/app/explore/page.tsx",
-                lineNumber: 155,
+                lineNumber: 156,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/explore/page.tsx",
-        lineNumber: 75,
+        lineNumber: 76,
         columnNumber: 5
     }, this);
 }
