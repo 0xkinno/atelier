@@ -65,8 +65,8 @@ class LocalDatabase {
   private tombstones = new Set<string>();
   private products = new Map<string, Product>(); // key: `${handle}:${id}`
   private purchases = new Map<string, Purchase>(); // key: txHash
-  private buyerPurchases = new Map<string, string[]>(); // key: wallet, value: txHashes
-  private creatorPurchases = new Map<string, string[]>(); // key: handle, value: txHashes
+  private buyerPurchases = new Map<string, string[]>(); // key: purchases:buyer:{connectedWalletAddress}, value: array of txHashes
+  private creatorPurchases = new Map<string, string[]>(); // key: purchases:creator:{handle}, value: array of txHashes
   private nonces = new Map<string, { nonce: string; expiresAt: number; used: boolean }>();
   private sessions = new Map<string, { walletAddress: string; handle?: string; expiresAt: number }>();
   private rateLimits = new Map<string, { count: number; resetAt: number }>();
@@ -75,8 +75,11 @@ class LocalDatabase {
     this.seedDemoData();
   }
 
+  private normalizeAddr(addr: string): string {
+    return addr.replace(/\s+/g, '').toLowerCase();
+  }
+
   private seedDemoData() {
-    // Seed initial demo creators and products as instructed for production quality demo
     const maya: Profile = {
       handle: 'mayastudio',
       walletAddress: 'NQ07 0000 0000 0000 0000 0000 0000 0000 0000',
@@ -108,10 +111,10 @@ class LocalDatabase {
     };
 
     this.profiles.set(maya.handle, maya);
-    this.walletToHandle.set(maya.walletAddress.toLowerCase(), maya.handle);
+    this.walletToHandle.set(this.normalizeAddr(maya.walletAddress), maya.handle);
 
     this.profiles.set(alex.handle, alex);
-    this.walletToHandle.set(alex.walletAddress.toLowerCase(), alex.handle);
+    this.walletToHandle.set(this.normalizeAddr(alex.walletAddress), alex.handle);
 
     // Products for Maya
     const prod1: Product = {
@@ -177,7 +180,7 @@ class LocalDatabase {
   }
 
   async getProfileByWallet(walletAddress: string): Promise<Profile | null> {
-    const handle = this.walletToHandle.get(walletAddress.toLowerCase());
+    const handle = this.walletToHandle.get(this.normalizeAddr(walletAddress));
     if (!handle) return null;
     return this.getProfile(handle);
   }
@@ -188,14 +191,14 @@ class LocalDatabase {
       throw new Error('This handle was deleted and cannot be registered again.');
     }
     this.profiles.set(h, profile);
-    this.walletToHandle.set(profile.walletAddress.toLowerCase(), h);
+    this.walletToHandle.set(this.normalizeAddr(profile.walletAddress), h);
   }
 
   async deleteProfile(handle: string): Promise<void> {
     const h = handle.toLowerCase();
     const prof = this.profiles.get(h);
     if (prof) {
-      this.walletToHandle.delete(prof.walletAddress.toLowerCase());
+      this.walletToHandle.delete(this.normalizeAddr(prof.walletAddress));
       this.profiles.delete(h);
       this.tombstones.add(h);
     }
@@ -253,21 +256,22 @@ class LocalDatabase {
     if (this.purchases.has(purchase.txHash)) {
       throw new Error('Transaction has already been processed.');
     }
+    // Store exact real transaction object
     this.purchases.set(purchase.txHash, purchase);
 
-    // Buyer index
-    const bKey = purchase.buyerAddress.toLowerCase();
+    // FIX 3: Append to buyer list (Key: purchases:buyer:{connectedWalletAddress})
+    const bKey = `purchases:buyer:${this.normalizeAddr(purchase.buyerAddress)}`;
     const bList = this.buyerPurchases.get(bKey) || [];
-    bList.push(purchase.txHash);
+    bList.unshift(purchase.txHash); // Newest purchase added to the front
     this.buyerPurchases.set(bKey, bList);
 
-    // Creator index
-    const cKey = purchase.handle.toLowerCase();
+    // FIX 2: Append to creator sales list (Key: purchases:creator:{handle})
+    const cKey = `purchases:creator:${purchase.handle.toLowerCase()}`;
     const cList = this.creatorPurchases.get(cKey) || [];
-    cList.push(purchase.txHash);
+    cList.unshift(purchase.txHash); // Newest purchase added to the front
     this.creatorPurchases.set(cKey, cList);
 
-    // Update product & profile stats
+    // Update product & profile cumulative sales metrics
     const product = await this.getProduct(purchase.handle, purchase.productId);
     if (product) {
       product.salesCount = (product.salesCount || 0) + 1;
@@ -287,7 +291,8 @@ class LocalDatabase {
   }
 
   async getPurchasesByBuyer(buyerAddress: string): Promise<Purchase[]> {
-    const hashes = this.buyerPurchases.get(buyerAddress.toLowerCase()) || [];
+    const bKey = `purchases:buyer:${this.normalizeAddr(buyerAddress)}`;
+    const hashes = this.buyerPurchases.get(bKey) || [];
     const list: Purchase[] = [];
     for (const h of hashes) {
       const p = this.purchases.get(h);
@@ -297,18 +302,19 @@ class LocalDatabase {
   }
 
   async getPurchasesByCreator(handle: string): Promise<Purchase[]> {
-    const hashes = this.creatorPurchases.get(handle.toLowerCase()) || [];
+    const cKey = `purchases:creator:${handle.toLowerCase()}`;
+    const hashes = this.creatorPurchases.get(cKey) || [];
     const list: Purchase[] = [];
     for (const h of hashes) {
       const p = this.purchases.get(h);
       if (p) list.push(p);
     }
-    return list.sort((a, b) => new Date(b.verifiedAt).getTime() - new Date(a.verifiedAt).getTime());
+    return list;
   }
 
   // --- AUTH NONCES & SESSIONS ---
   async saveNonce(walletAddress: string, nonce: string, ttlMs: number = 300000): Promise<void> {
-    this.nonces.set(walletAddress.toLowerCase(), {
+    this.nonces.set(this.normalizeAddr(walletAddress), {
       nonce,
       expiresAt: Date.now() + ttlMs,
       used: false,
@@ -316,23 +322,23 @@ class LocalDatabase {
   }
 
   async getNonce(walletAddress: string): Promise<{ nonce: string; expiresAt: number; used: boolean } | null> {
-    const item = this.nonces.get(walletAddress.toLowerCase());
+    const item = this.nonces.get(this.normalizeAddr(walletAddress));
     if (!item) return null;
     if (Date.now() > item.expiresAt) {
-      this.nonces.delete(walletAddress.toLowerCase());
+      this.nonces.delete(this.normalizeAddr(walletAddress));
       return null;
     }
     return item;
   }
 
   async markNonceUsed(walletAddress: string): Promise<void> {
-    const item = this.nonces.get(walletAddress.toLowerCase());
+    const item = this.nonces.get(this.normalizeAddr(walletAddress));
     if (item) item.used = true;
   }
 
   async saveSession(token: string, walletAddress: string, handle?: string, ttlMs: number = 604800000): Promise<void> {
     this.sessions.set(token, {
-      walletAddress: walletAddress.toLowerCase(),
+      walletAddress: this.normalizeAddr(walletAddress),
       handle: handle?.toLowerCase(),
       expiresAt: Date.now() + ttlMs,
     });

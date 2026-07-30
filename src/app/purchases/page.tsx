@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import DashboardLayout from '@/components/DashboardLayout';
-import { Download, ExternalLink, ArrowLeft, ShoppingBag } from 'lucide-react';
+import { Download, ArrowLeft, ShoppingBag } from 'lucide-react';
 import { useWallet } from '@/context/WalletContext';
 import { Purchase } from '@/lib/db';
 
@@ -33,6 +33,24 @@ export default function BuyerPurchasesPage() {
     }
     fetchMyPurchases();
   }, [walletAddress]);
+
+  const handleDownloadReceipt = (item: Purchase) => {
+    const amountStr = item.amountNim ? `${item.amountNim.toLocaleString()} NIM` : `$${item.amountUsdt} USDT`;
+    const receiptText = `ATELIER PURCHASE RECEIPT
+Product: ${item.productTitle}
+Creator: ${item.handle}
+Amount: ${amountStr}
+Transaction: ${item.txHash}
+Date: ${item.verifiedAt || new Date().toISOString()}
+Explorer: https://nimiq.watch/#${item.txHash}
+Status: Verified on Nimiq blockchain`;
+
+    const blob = new Blob([receiptText], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `receipt-${item.txHash.slice(0, 12)}.txt`;
+    a.click();
+  };
 
   return (
     <DashboardLayout title="Library" handle="mayastudio">
@@ -88,7 +106,7 @@ export default function BuyerPurchasesPage() {
                     <br />
                     • Purchased {new Date(item.verifiedAt).toLocaleDateString()}
                     <br />
-                    • File Deliverable: 4.8 MB
+                    • TxHash: {item.txHash}
                   </div>
                 </div>
 
@@ -96,9 +114,9 @@ export default function BuyerPurchasesPage() {
                   <a href={`https://raw.githubusercontent.com/nimiq/developer-center/main/README.md`} download target="_blank" rel="noreferrer" className="btn btn-lime" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
                     <Download size={18} /> Download File
                   </a>
-                  <a href={`https://nimiq.watch/#${item.txHash}`} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
-                    <ExternalLink size={18} /> Receipt
-                  </a>
+                  <button onClick={() => handleDownloadReceipt(item)} className="btn btn-ghost" style={{ flex: 1, minHeight: '52px', fontSize: '0.95rem', justifyContent: 'center' }}>
+                    <Download size={18} /> Receipt (.txt)
+                  </button>
                 </div>
               </div>
             ))}
