@@ -15,7 +15,9 @@
   <img src="docs/screenshots/atelier-banner.png" alt="Atelier Banner" width="100%" />
 </p>
 
+
 > **Atelier is a zero-commission creator storefront that lives inside Nimiq Pay.**
+> 
 > Photographers sell presets. Designers sell templates. Musicians sell sample packs. Developers sell boilerplates. Every payment settles in under three seconds, verified on-chain, with the creator keeping 100% of the revenue. No accounts. No middlemen. No platform fees.
 
 **Gumroad takes 10%. Payhip takes 5%. Atelier takes nothing.**
