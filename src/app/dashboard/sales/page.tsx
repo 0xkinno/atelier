@@ -1,15 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import SidebarNav from '@/components/SidebarNav';
+import DashboardLayout from '@/components/DashboardLayout';
 import { useWallet } from '@/context/WalletContext';
-import { Download, TrendingUp, DollarSign, Menu } from 'lucide-react';
+import { Download, TrendingUp, DollarSign } from 'lucide-react';
 import { Purchase } from '@/lib/db';
 
 export default function SalesPage() {
   const { handle: contextHandle } = useWallet();
   const handle = contextHandle || 'mayastudio';
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [sales, setSales] = useState<Purchase[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -59,128 +58,117 @@ export default function SalesPage() {
   };
 
   return (
-    <div className="ambient-bg-wash" style={{ display: 'flex', minHeight: '100vh' }}>
-      <SidebarNav handle={handle} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+    <DashboardLayout title="Sales History" handle={handle}>
+      {/* Landscape Header Image */}
+      <div style={{
+        width: '100%', maxHeight: '160px', height: '140px', borderRadius: '16px', overflow: 'hidden',
+        marginBottom: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)'
+      }} className="img-hover">
+        <img src="/images/dashboard_header_desk.jpg" alt="Sales Analytics Header" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      </div>
 
-      <div style={{ flex: 1, padding: '24px 32px 120px 32px', overflowY: 'auto' }} className="dashboard-content-main">
-        {/* Mobile Header Bar */}
-        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid var(--border-light)' }} className="dashboard-mobile-header">
-          <button onClick={() => setSidebarOpen(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Menu size={24} color="var(--text-primary)" />
-            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Menu</span>
-          </button>
-          <span className="font-display" style={{ fontWeight: 700, fontSize: '1.1rem' }}>Sales History</span>
+      <div className="layout-stack-header" style={{ marginBottom: '28px' }}>
+        <div>
+          <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '6px' }}>
+            <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>ANALYTICS & REVENUE</span>
+          </div>
+          <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)' }}>Sales History</h1>
         </div>
 
-        {/* Landscape Header Image */}
-        <div style={{
-          width: '100%', maxHeight: '160px', height: '140px', borderRadius: '16px', overflow: 'hidden',
-          marginBottom: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)'
-        }} className="img-hover">
-          <img src="/images/dashboard_header_desk.jpg" alt="Sales Analytics Header" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </div>
+        <button onClick={exportCSV} className="btn btn-ghost btn-sm" style={{ minHeight: '44px' }}>
+          <Download size={16} /> Export CSV
+        </button>
+      </div>
 
-        <div className="layout-stack-header" style={{ marginBottom: '28px' }}>
-          <div>
-            <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '6px' }}>
-              <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>ANALYTICS & REVENUE</span>
-            </div>
-            <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)' }}>Sales History</h1>
+      {/* Summary Stat Cards */}
+      <div className="grid-three-col" style={{ gap: '20px', marginBottom: '28px' }}>
+        <div className="card glow-hover" style={{ padding: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <span className="eyebrow">TOTAL SALES</span>
+            <DollarSign size={18} color="var(--accent-olive)" />
           </div>
-
-          <button onClick={exportCSV} className="btn btn-ghost btn-sm">
-            <Download size={16} /> Export CSV
-          </button>
-        </div>
-
-        {/* Summary Stat Cards */}
-        <div className="grid-three-col" style={{ gap: '20px', marginBottom: '28px' }}>
-          <div className="card glow-hover" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <span className="eyebrow">TOTAL SALES</span>
-              <DollarSign size={18} color="var(--accent-olive)" />
-            </div>
-            <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600 }}>
-              {displaySales.length}
-            </div>
-          </div>
-          <div className="card glow-hover" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <span className="eyebrow">NIM RECEIVED</span>
-              <TrendingUp size={18} color="var(--accent-olive)" />
-            </div>
-            <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600, color: 'var(--accent-olive)' }}>
-              {totalNim.toLocaleString()} NIM
-            </div>
-          </div>
-          <div className="card glow-hover" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <span className="eyebrow">USDT RECEIVED</span>
-              <DollarSign size={18} color="var(--accent-olive)" />
-            </div>
-            <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600 }}>
-              ${totalUsdt} USDT
-            </div>
+          <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600 }}>
+            {displaySales.length}
           </div>
         </div>
-
-        {/* Period Filter Pills */}
-        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
-          {(['today', '7d', '30d', 'all'] as const).map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setPeriodFilter(filter)}
-              className="btn btn-sm"
-              style={{
-                backgroundColor: periodFilter === filter ? 'var(--accent-olive)' : 'var(--bg-card)',
-                color: periodFilter === filter ? '#FFFFFF' : 'var(--text-secondary)',
-                border: '1px solid var(--border-medium)',
-                textTransform: 'uppercase',
-                fontSize: '0.75rem',
-                padding: '6px 14px'
-              }}
-            >
-              {filter}
-            </button>
-          ))}
+        <div className="card glow-hover" style={{ padding: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <span className="eyebrow">NIM RECEIVED</span>
+            <TrendingUp size={18} color="var(--accent-olive)" />
+          </div>
+          <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600, color: 'var(--accent-olive)' }}>
+            {totalNim.toLocaleString()} NIM
+          </div>
         </div>
-
-        {/* Sales Table */}
-        <div className="card" style={{ padding: '24px' }}>
-          {isDemo && (
-            <div style={{ padding: '12px 16px', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-              These are sample transactions. Real sales will appear here when buyers purchase your products.
-            </div>
-          )}
-
-          <div className="layout-table-wrapper">
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem', minWidth: '500px' }}>
-              <thead>
-                <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                  <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">PRODUCT</th>
-                  <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">BUYER ADDRESS</th>
-                  <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">AMOUNT</th>
-                  <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">CHAIN</th>
-                  <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">DATE</th>
-                </tr>
-              </thead>
-              <tbody>
-                {displaySales.map((s) => (
-                  <tr key={s.txHash} style={{ borderBottom: '1px solid var(--border-light)' }}>
-                    <td style={{ padding: '14px 10px', fontWeight: 600 }}>{s.productTitle}</td>
-                    <td style={{ padding: '14px 10px', color: 'var(--text-secondary)' }} className="font-mono">{s.buyerAddress}</td>
-                    <td style={{ padding: '14px 10px', fontWeight: 600, color: 'var(--accent-olive)' }}>
-                      {s.amountNim ? `${s.amountNim.toLocaleString()} NIM` : `$${s.amountUsdt} USDT`}
-                    </td>
-                    <td style={{ padding: '14px 10px', fontSize: '0.8rem' }} className="font-mono">{s.chain}</td>
-                    <td style={{ padding: '14px 10px', color: 'var(--text-tertiary)' }}>{new Date(s.verifiedAt).toLocaleDateString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="card glow-hover" style={{ padding: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <span className="eyebrow">USDT RECEIVED</span>
+            <DollarSign size={18} color="var(--accent-olive)" />
+          </div>
+          <div className="font-display" style={{ fontSize: '1.8rem', fontWeight: 600 }}>
+            ${totalUsdt} USDT
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Period Filter Pills */}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '4px' }}>
+        {(['today', '7d', '30d', 'all'] as const).map((filter) => (
+          <button
+            key={filter}
+            onClick={() => setPeriodFilter(filter)}
+            className="btn btn-sm"
+            style={{
+              backgroundColor: periodFilter === filter ? 'var(--accent-olive)' : 'var(--bg-card)',
+              color: periodFilter === filter ? '#FFFFFF' : 'var(--text-secondary)',
+              border: '1px solid var(--border-medium)',
+              textTransform: 'uppercase',
+              fontSize: '0.75rem',
+              padding: '6px 14px',
+              minHeight: '40px',
+              flexShrink: 0
+            }}
+          >
+            {filter}
+          </button>
+        ))}
+      </div>
+
+      {/* Sales Table */}
+      <div className="card" style={{ padding: '24px' }}>
+        {isDemo && (
+          <div style={{ padding: '12px 16px', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+            These are sample transactions. Real sales will appear here when buyers purchase your products.
+          </div>
+        )}
+
+        <div className="layout-table-wrapper">
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem', minWidth: '500px' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
+                <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">PRODUCT</th>
+                <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">BUYER ADDRESS</th>
+                <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">AMOUNT</th>
+                <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">CHAIN</th>
+                <th style={{ padding: '10px', color: 'var(--text-tertiary)' }} className="font-mono">DATE</th>
+              </tr>
+            </thead>
+            <tbody>
+              {displaySales.map((s) => (
+                <tr key={s.txHash} style={{ borderBottom: '1px solid var(--border-light)' }}>
+                  <td style={{ padding: '14px 10px', fontWeight: 600 }}>{s.productTitle}</td>
+                  <td style={{ padding: '14px 10px', color: 'var(--text-secondary)' }} className="font-mono">{s.buyerAddress}</td>
+                  <td style={{ padding: '14px 10px', fontWeight: 600, color: 'var(--accent-olive)' }}>
+                    {s.amountNim ? `${s.amountNim.toLocaleString()} NIM` : `$${s.amountUsdt} USDT`}
+                  </td>
+                  <td style={{ padding: '14px 10px', fontSize: '0.8rem' }} className="font-mono">{s.chain}</td>
+                  <td style={{ padding: '14px 10px', color: 'var(--text-tertiary)' }}>{new Date(s.verifiedAt).toLocaleDateString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </DashboardLayout>
   );
 }

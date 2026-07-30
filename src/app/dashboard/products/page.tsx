@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import SidebarNav from '@/components/SidebarNav';
+import DashboardLayout from '@/components/DashboardLayout';
 import { useWallet } from '@/context/WalletContext';
-import { Plus, Edit2, Trash2, ExternalLink, Menu, X, Package } from 'lucide-react';
+import { Plus, Edit2, Trash2, ExternalLink, X, Package } from 'lucide-react';
 import { Product } from '@/lib/db';
 
 export default function ProductsPage() {
   const { handle: contextHandle } = useWallet();
   const handle = contextHandle || 'mayastudio';
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -130,92 +129,79 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="ambient-bg-wash" style={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
-      <SidebarNav handle={handle} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      <div style={{ flex: 1, padding: '24px 32px 120px 32px', overflowY: 'auto', width: '100%' }} className="dashboard-content-main">
-        {/* Mobile Header Bar */}
-        <div style={{ display: 'none', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid var(--border-light)' }} className="dashboard-mobile-header">
-          <button onClick={() => setSidebarOpen(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Menu size={24} color="var(--text-primary)" />
-            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Menu</span>
-          </button>
-          <span className="font-display" style={{ fontWeight: 700, fontSize: '1.1rem' }}>Products</span>
+    <DashboardLayout title="Products" handle={handle}>
+      {/* Top Header Title & Action Button Stacking Container */}
+      <div className="layout-stack-header" style={{ marginBottom: '24px' }}>
+        <div>
+          <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '8px' }}>
+            <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>STOREFRONT CATALOG</span>
+          </div>
+          <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', lineHeight: 1.25 }}>Product Management</h1>
         </div>
 
-        {/* Top Header Title & Action Button Stacking Container */}
-        <div className="layout-stack-header" style={{ marginBottom: '28px' }}>
-          <div>
-            <div style={{ display: 'inline-block', backgroundColor: 'var(--bg-secondary)', padding: '4px 12px', borderRadius: '100px', marginBottom: '8px' }}>
-              <span className="eyebrow" style={{ color: 'var(--text-secondary)', fontSize: '0.68rem' }}>STOREFRONT CATALOG</span>
-            </div>
-            <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', lineHeight: 1.25 }}>Product Management</h1>
-          </div>
+        <button onClick={openAddModal} className="btn btn-lime btn-sm" style={{ alignSelf: 'flex-start', minWidth: '160px', minHeight: '48px' }}>
+          <Plus size={16} /> Add New Product
+        </button>
+      </div>
 
-          <button onClick={openAddModal} className="btn btn-lime btn-sm" style={{ alignSelf: 'flex-start', minWidth: '160px' }}>
-            <Plus size={16} /> Add New Product
+      {/* Loading / Empty States */}
+      {isLoading ? (
+        <div style={{ padding: '60px', textAlign: 'center', color: 'var(--text-tertiary)' }}>
+          Loading storefront products...
+        </div>
+      ) : products.length === 0 ? (
+        <div className="card" style={{ padding: '60px 20px', textAlign: 'center' }}>
+          <Package size={40} color="var(--accent-olive)" style={{ marginBottom: '16px' }} />
+          <h3 style={{ marginBottom: '8px' }}>No products in your catalog yet</h3>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
+            Add your first preset, template, or guide to start receiving NIM.
+          </p>
+          <button onClick={openAddModal} className="btn btn-olive" style={{ minHeight: '48px' }}>
+            <Plus size={16} /> Add First Product
           </button>
         </div>
-
-        {/* Loading / Empty States */}
-        {isLoading ? (
-          <div style={{ padding: '60px', textAlign: 'center', color: 'var(--text-tertiary)' }}>
-            Loading storefront products...
-          </div>
-        ) : products.length === 0 ? (
-          <div className="card" style={{ padding: '60px 20px', textAlign: 'center' }}>
-            <Package size={40} color="var(--accent-olive)" style={{ marginBottom: '16px' }} />
-            <h3 style={{ marginBottom: '8px' }}>No products in your catalog yet</h3>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
-              Add your first preset, template, or guide to start receiving NIM.
-            </p>
-            <button onClick={openAddModal} className="btn btn-olive">
-              <Plus size={16} /> Add First Product
-            </button>
-          </div>
-        ) : (
-          /* Products Grid */
-          <div className="grid-three-col" style={{ gap: '24px' }}>
-            {products.map((p) => (
-              <div key={p.id} className="card glow-hover" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div>
-                  <div style={{ height: '180px', backgroundColor: 'var(--bg-secondary)', position: 'relative' }}>
-                    <img src={p.previewImageUrl} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    <span style={{
-                      position: 'absolute', top: '10px', right: '10px',
-                      backgroundColor: 'var(--bg-dark)', color: 'var(--accent-primary)',
-                      padding: '4px 10px', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 600
-                    }} className="font-mono">
-                      ${p.priceUsd}
-                    </span>
-                  </div>
-                  <div style={{ padding: '20px' }}>
-                    <span className="eyebrow" style={{ color: 'var(--accent-moss)', fontSize: '0.68rem', marginBottom: '4px', display: 'block' }}>
-                      {p.category}
-                    </span>
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', lineHeight: 1.3 }}>{p.title}</h3>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)' }} className="font-mono">
-                      {p.salesCount || 0} sales • {p.fileSize || '4.8 MB'}
-                    </div>
-                  </div>
+      ) : (
+        /* Products Feed Grid (Single column on mobile) */
+        <div className="products-catalog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
+          {products.map((p) => (
+            <div key={p.id} className="card glow-hover" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: '20px' }}>
+              <div>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', backgroundColor: 'var(--bg-secondary)', overflow: 'hidden' }}>
+                  <img src={p.previewImageUrl} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <span style={{
+                    position: 'absolute', top: '10px', right: '10px',
+                    backgroundColor: 'var(--bg-dark)', color: 'var(--accent-primary)',
+                    padding: '4px 10px', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 600
+                  }} className="font-mono">
+                    ${p.priceUsd}
+                  </span>
                 </div>
-
-                <div style={{ padding: '0 20px 20px 20px', display: 'flex', gap: '8px' }}>
-                  <button onClick={(e) => openEditModal(p, e)} className="btn btn-ghost btn-sm" style={{ flex: 1 }}>
-                    <Edit2 size={14} /> Edit
-                  </button>
-                  <Link href={`/${handle}/${p.id}`} target="_blank" className="btn btn-ghost btn-sm" style={{ padding: '8px' }}>
-                    <ExternalLink size={14} />
-                  </Link>
-                  <button onClick={(e) => handleDeleteProduct(p, e)} className="btn btn-ghost btn-sm" style={{ color: '#B91C1C', padding: '8px' }}>
-                    <Trash2 size={14} />
-                  </button>
+                <div style={{ padding: '20px' }}>
+                  <span className="eyebrow" style={{ color: 'var(--accent-moss)', fontSize: '0.68rem', marginBottom: '4px', display: 'block' }}>
+                    {p.category}
+                  </span>
+                  <h3 style={{ fontSize: '1.15rem', marginBottom: '8px', lineHeight: 1.35 }}>{p.title}</h3>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)' }} className="font-mono">
+                    {p.salesCount || 0} sales • {p.fileSize || '4.8 MB'}
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+
+              <div style={{ padding: '0 20px 20px 20px', display: 'flex', gap: '8px' }}>
+                <button onClick={(e) => openEditModal(p, e)} className="btn btn-ghost btn-sm" style={{ flex: 1, minHeight: '44px' }}>
+                  <Edit2 size={14} /> Edit
+                </button>
+                <Link href={`/${handle}/${p.id}`} target="_blank" className="btn btn-ghost btn-sm" style={{ padding: '8px', minHeight: '44px' }}>
+                  <ExternalLink size={14} />
+                </Link>
+                <button onClick={(e) => handleDeleteProduct(p, e)} className="btn btn-ghost btn-sm" style={{ color: '#B91C1C', padding: '8px', minHeight: '44px' }}>
+                  <Trash2 size={14} />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Add / Edit Product Modal */}
       {isModalOpen && (
@@ -326,6 +312,15 @@ export default function ProductsPage() {
           </div>
         </div>
       )}
-    </div>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .products-catalog-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+        }
+      `}</style>
+    </DashboardLayout>
   );
 }
